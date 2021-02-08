@@ -1,0 +1,1 @@
+<div id="appLoading" class="ail-loading h1 text-white" style="display: none"></div>

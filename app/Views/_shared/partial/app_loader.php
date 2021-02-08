@@ -1,0 +1,1 @@
+<i class="fas fa-fw fa-spin fa-spinner"></i>

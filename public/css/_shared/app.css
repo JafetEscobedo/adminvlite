@@ -1,0 +1,205 @@
+/* Estilos predeterminados para retocar aspecto */
+
+* {
+  font-family: Roboto, sans-serif;
+  outline: none !important;
+  word-wrap: break-word !important;
+  border-radius: 0 !important;
+}
+
+textarea {
+  resize: none !important;
+}
+
+table td {
+  vertical-align: middle !important;
+}
+
+.opacity-0 {
+  opacity: 0 !important;
+}
+
+li.option.load-more {
+  padding: 6px 12px !important;
+}
+
+.alert-danger{
+  color: #721c24 !important;
+  background-color: #f8d7da !important;
+  border-color: #f5c6cb !important;
+}
+
+.alert-info {
+  color: #0c5460 !important;
+  background-color: #d1ecf1 !important;
+  border-color: #bee5eb !important;
+}
+
+.alert-success {
+  color: #155724 !important;
+  background-color: #d4edda !important;
+  border-color: #c3e6cb !important;
+}
+
+.badge{
+  border-radius: 0.25rem !important;
+}
+
+.card-footer {
+  background: none !important;
+  border-top: 1px solid rgba(0, 0, 0, .125);
+}
+
+.card-title {
+  width: 100% !important;
+}
+
+.card-tools {
+  width: auto !important;
+}
+
+.card-title, .btn, .modal-title {
+  text-transform: uppercase !important;
+}
+
+.card-header, .card-title, .modal-header, .modal-title {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.card-header {
+  justify-content: space-between !important;
+}
+
+.custom-switch:hover label, .custom-radio:hover label, .custom-checkbox label{
+  cursor: pointer !important;
+}
+
+.input-group-text{
+  padding: 0.25rem 0.5rem !important;
+}
+
+.navbar-nav>.user-menu>.dropdown-menu>.user-footer, .navbar-nav>.user-menu>.dropdown-menu, .navbar-nav>.user-menu>.dropdown-menu>.user-body {
+  border-radius: .25rem !important;
+}
+
+/* Estilos genéricos */
+
+.boxs-none {
+  box-shadow: none !important;
+}
+
+.cursor-pointer{
+  cursor: pointer !important;
+}
+
+/* Ajustar widget timeline  */
+
+.timeline>div>.fa, .timeline>div>.fab, .timeline>div>.far, .timeline>div>.fas, .timeline>div>.glyphicon, .timeline>div>.ion {
+  left: 0 !important;
+}
+
+.timeline::before {
+  left: 13px !important;
+  width: 4px !important;
+}
+
+.timeline>div>.timeline-item {
+  margin-left: 40px !important;
+}
+
+/* Ajustar listas agrupadas */
+
+.list-group.list-group-sm .list-group-item {
+  padding: 8px 12px !important;
+}
+
+/* Estilos para DataTable */
+
+table thead{
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+}
+
+table.dataTable.dtr-inline.collapsed.table-sm>tbody>tr>td:first-child:before, table.dataTable.dtr-inline.collapsed.table-sm>tbody>tr>th:first-child:before {
+  /* Alinear el ícono de '+' de plugin responsive */
+  top: 50% !important;
+}
+
+.dataTables_processing {
+  z-index: 105
+}
+
+.page-link:focus {
+  box-shadow: none !important;
+}
+
+/* Personalizar el estilo del indicador de carga (Pace) */
+
+.pace {
+  pointer-events: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: #007bff;
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 3px;
+}
+
+/* Spinner Cargando */
+
+.ail-loading {
+  position: fixed;
+  z-index: 1999;
+  height: 80px;
+  width: 80px;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.ail-loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(rgba(20, 20, 20, .8), rgba(0, 0, 0, .8));
+}
+
+.ail-loading:after {
+  content: '';
+  display: block;
+  font-size: 20px;
+  width: 10px;
+  height: 10px;
+  margin-top: 35px;
+  margin-left: 35px;
+  animation-name: spinner;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  border-radius: 50%;
+  box-shadow: #fff 20px 0 0 0, #fff 14px 14px 0 0, #fff 0 20px 0 0, #fff -14px 14px 0 0, #fff -20px 0 0 0, #fff -14px -14px 0 0, #fff 0 -20px 0 0, #fff 14px -14px 0 0;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

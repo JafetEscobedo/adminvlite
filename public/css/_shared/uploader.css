@@ -1,0 +1,33 @@
+.uploader-file-add {
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px dashed rgba(0,0,0,0.125);
+  color: #6c757d;
+  cursor: pointer;
+  display: flex;
+  height: 80px;
+  justify-content: center;
+  transition-duration: 250ms;
+  width: 100%;
+}
+.uploader-file-add:hover {
+  border: 1px dashed #007bff;
+}
+.uploader-file-container {
+  background-color: #f8f9fa;
+  border: 1px solid rgba(0,0,0,0.125);
+  justify-content: center;
+  margin-bottom: 10px;
+  min-height: calc(80px + 2.50rem);
+  transition-duration: 250ms;
+  width: 100%;
+}
+.uploader-file-input {
+  display: none;
+}
+.uploader-file-thumbnail {
+  min-height: 80px;
+  margin: 1.25rem;
+}
+
+
