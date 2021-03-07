@@ -17,7 +17,7 @@
             <?= session("business_name") ?>
           </p>
 
-          <?= form_open("offsite/action/login", "name='login'") ?>
+          <?= form_open("offsite/action/login", ["name" => "login", "autocomplete" => "off"]) ?>
           <div id="alert"></div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -38,8 +38,8 @@
 
           <div class="row">
             <div class="col-12">
-              <button type="submit" class="btn btn-default btn-sm float-right">
-                <i class="fas fa-fw fa-unlock text-primary"></i>&nbsp;&nbsp;Acceder
+              <button type="submit" class="btn btn-sm bg-gradient-primary float-right">
+                <i class="fas fa-fw fa-unlock"></i>&nbsp;&nbsp;Acceder
               </button>
             </div>
           </div>
@@ -54,6 +54,6 @@
 
     <?= view("_shared/partial/app_loading") ?>
 
-    <script defer type="module" src="<?= base_url("public/js/offsite/login.js") ?>"></script>
+    <script defer type="module" src="<?= base_url("public/js/offsite/login.js?v=") . APP_VERSION ?>"></script>
   </body>
 </html>

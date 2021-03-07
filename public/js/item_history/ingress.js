@@ -48,8 +48,8 @@ const dtIngressBatch = $("#ingressBatch").DataTable({
             </span>`
     }, {
       render: data => `
-        <button title="Remover" class="btn btn-remove-row btn-default btn-sm" data-item-id="${data.itemId}">
-          <i class="fas fa-fw fa-times-circle text-danger"></i>
+        <button title="Remover" class="btn btn-remove-row btn-sm bg-gradient-danger" data-item-id="${data.itemId}">
+          <i class="fas fa-fw fa-times-circle"></i>
         </button>`
     }
   ]

@@ -101,4 +101,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/item_history/inventory.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/item_history/inventory.js?v=") . APP_VERSION ?>"></script>

@@ -78,8 +78,8 @@ const dtUsersList = $("#usersList").DataTable({
         </span>`
     }, {
       render: data => `
-        <a title="Actualizar" class="btn btn-xs btn-default" href="${app.url("user/view/users-list/update/" + data.userId)}")">
-          <i class="fas fa-fw fa-pencil-alt text-info"></i>
+        <a title="Actualizar" class="btn btn-xs bg-gradient-info" href="${app.url("user/view/users-list/update/" + data.userId)}")">
+          <i class="fas fa-fw fa-pencil-alt"></i>
         </a>`
     }]
 });

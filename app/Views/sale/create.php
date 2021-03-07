@@ -24,7 +24,7 @@ view(
         <div id="alert"></div>
       </div>
     </div>
-    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code"]) ?>
+    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code", "autocomplete" => "off"]) ?>
     <div class="row">
       <div class="col-md-2">
         <div class="form-group">
@@ -75,7 +75,7 @@ view(
 <div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <?= form_open("sale/create/single-using-batch", ["name" => "confirmSale"]) ?>
+      <?= form_open("sale/create/single-using-batch", ["name" => "confirmSale", "autocomplete" => "off"]) ?>
       <div class="modal-header">
         <h5 class="modal-title">Confirmación de Venta</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -127,4 +127,4 @@ view(
 
 <div id="storage"></div>
 
-<script defer type="module" src="<?= base_url("public/js/sale/create.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/sale/create.js?v=") . APP_VERSION ?>"></script>

@@ -12,7 +12,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 ?>
 
 <div class="card pt-3">
-  <?= form_open("config/update/business-name", ["name" => "config"]) ?>
+  <?= form_open("config/update/business-name", ["name" => "config", "autocomplete" => "off"]) ?>
   <div class="card-body">
     <div class="row">
       <div class="col-12"><div id="alert"></div></div>
@@ -74,4 +74,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   const CONFIG_ENTITY = JSON.parse("<?= addslashes(json_encode($configEntity)) ?>");
 </script>
 
-<script defer type="module" src="<?= base_url("public/js/config/business_name.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/config/business_name.js?v=") . APP_VERSION ?>"></script>

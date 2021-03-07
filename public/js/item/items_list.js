@@ -21,9 +21,9 @@ const dtItemsList = $("#itemsList").DataTable({
     },
     buttons: [{
         extend: "colvis",
-        text: `<i class="fas fa-fw fa-table text-primary"></i> Columnas`,
+        text: `<i class="fas fa-fw fa-table"></i> Columnas`,
         titleAttr: "Mostrar / Ocultar",
-        className: "mb-4 btn btn-sm btn-default"
+        className: "mb-4 btn btn-sm bg-gradient-primary"
       }]
   },
   order: [[1, "desc"]],
@@ -104,11 +104,11 @@ const dtItemsList = $("#itemsList").DataTable({
         </span>`
     }, {
       render: data => `
-        <a title="Actualizar" class="btn btn-xs btn-default" href="${app.url("item/view/items-list/update/" + data.itemId)}")">
-          <i class="fas fa-fw fa-pencil-alt text-info"></i>
+        <a title="Actualizar" class="btn btn-xs bg-gradient-info" href="${app.url("item/view/items-list/update/" + data.itemId)}")">
+          <i class="fas fa-fw fa-pencil-alt"></i>
         </a>
-        <a title="Historial" class="btn btn-xs btn-default" href="${app.url("item/view/items-list/history/" + data.itemId)}")">
-          <i class="fas fa-fw fa-history text-purple"></i>
+        <a title="Historial" class="btn btn-xs bg-gradient-purple" href="${app.url("item/view/items-list/history/" + data.itemId)}")">
+          <i class="fas fa-fw fa-history"></i>
         </a>`
     }]
 });

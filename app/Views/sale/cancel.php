@@ -21,15 +21,15 @@ view(
   <div class="card-body">
     <div class="row">
       <div class="col-md-6">
-        <?= form_open("sale/update/cancel-single", "id='sale'") ?>
+        <?= form_open("sale/update/cancel-single", ["id" => "sale", "autocomplete" => "off"]) ?>
         <div id="alert"></div>
         <div class="form-group">
           <label for="saleSerial">Número de venta</label>
           <div class="input-group">
             <input autofocus id="saleSerial" name="saleSerial" type="text" class="form-control form-control-sm" placeholder="00001" value="<?= $saleSerial ?? '' ?>" required>
             <div class="input-group-append">
-              <button id="checkSale" title="Revisar artículos de esta venta" type="button" class="btn btn-sm btn-default">
-                <i class="fas fa-fw fa-cart-arrow-down text-primary"></i>
+              <button id="checkSale" title="Revisar artículos de esta venta" type="button" class="btn btn-sm bg-gradient-primary">
+                <i class="fas fa-fw fa-cart-arrow-down"></i>
               </button>
             </div>
           </div>
@@ -41,8 +41,8 @@ view(
         </div>
 
         <div class="form-group d-flex justify-content-end">
-          <button type="submit" id="btnSubmitForm" class="btn btn-default btn-sm">
-            <i class="fas fa-fw fa-ban text-danger"></i>&nbsp;&nbsp;Cancelar venta
+          <button type="submit" id="btnSubmitForm" class="btn btn-sm bg-gradient-danger">
+            <i class="fas fa-fw fa-ban"></i>&nbsp;&nbsp;Cancelar venta
           </button>
         </div>
         <?= form_close() ?>
@@ -82,4 +82,4 @@ view(
 
 <div id="storage"></div>
 
-<script defer type="module" src="<?= base_url("public/js/sale/cancel.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/sale/cancel.js?v=") . APP_VERSION ?>"></script>

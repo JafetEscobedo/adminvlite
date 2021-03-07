@@ -21,8 +21,8 @@ view("_shared/partial/app_breadcrumb", ["links" => [
       <div class="col-sm-9">
         <div id="alertForBusinessLogo"></div>
         <div class="uploader-file-container" id="businessLogo"></div>
-        <label class="btn btn-sm btn-default float-right" for="configBusinessLogo" style="font-weight: normal" >
-          <i class="far fa-fw fa-file-image text-success"></i>&nbsp;&nbsp;Seleccionar imagen nueva
+        <label class="btn btn-sm bg-gradient-success float-right" for="configBusinessLogo" style="font-weight: normal" >
+          <i class="fas fa-fw fa-upload"></i>&nbsp;&nbsp;Seleccionar imagen nueva
         </label>
         <input accept="image/*" class="uploader-file-input" id="configBusinessLogo" name="configBusinessLogo" type="file">
       </div>
@@ -33,8 +33,8 @@ view("_shared/partial/app_breadcrumb", ["links" => [
       <div class="col-sm-9">
         <div id="alertForBusinessIcon"></div>
         <div class="uploader-file-container" id="businessIcon"></div>
-        <label class="btn btn-sm btn-default float-right" for="configBusinessIcon" style="font-weight: normal" >
-          <i class="far fa-fw fa-file-image text-success"></i>&nbsp;&nbsp;Seleccionar imagen nueva
+        <label class="btn btn-sm bg-gradient-success float-right" for="configBusinessIcon" style="font-weight: normal" >
+          <i class="fas fa-fw fa-upload"></i>&nbsp;&nbsp;Seleccionar imagen nueva
         </label>
         <input accept="image/*" class="uploader-file-input" id="configBusinessIcon" name="configBusinessIcon" type="file">
       </div>
@@ -46,7 +46,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 <template id="dropzone">
   <div class="uploader-file-thumbnail">
     <label class="uploader-file-add" style="font-weight: normal">
-      <i class="far fa-fw fa-file-image text-success"></i>&nbsp;&nbsp;Arrastre aquí su nueva imagen
+      <i class="fas fa-fw fa-upload"></i>&nbsp;&nbsp;Arrastre aquí su nueva imagen
     </label>
   </div>
 </template>
@@ -72,4 +72,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   const CONFIG_ENTITY = JSON.parse("<?= addslashes(json_encode($configEntity)) ?>");
 </script>
 
-<script defer type="module" src="<?= base_url("public/js/config/business_img.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/config/business_img.js?v=") . APP_VERSION ?>"></script>

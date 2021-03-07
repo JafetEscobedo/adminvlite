@@ -52,9 +52,7 @@ class UserRoleEntity extends BaseEntity
 
     foreach ($menus as $menu)
     {
-      $path = $request->getPost(md5($menu["path"]));
-
-      if ($path)
+      if ($path = $request->getPost(md5($menu["path"])))
       {
         $access[] = $path;
         continue;
@@ -62,17 +60,17 @@ class UserRoleEntity extends BaseEntity
 
       foreach ($menu["menu"] ?? [] as $submenu)
       {
-        $path = $request->getPost(md5($submenu["path"]));
+        if (!$path = $request->getPost(md5($submenu["path"])))
+        {
+          continue;
+        }
 
         if (!in_array($menu["path"], $access))
         {
           $access[] = $menu["path"];
         }
 
-        if ($path)
-        {
-          $access[] = $path;
-        }
+        $access[] = $path;
       }
     }
 

@@ -10,7 +10,7 @@ use Config\Services;
 class Login implements FilterInterface
 {
 
-  public function before(RequestInterface $request, $arguments = null) // : ResponseInterface :void
+  public function before(RequestInterface $request, $arguments = null) // : ResponseInterface | void
   {
     $arguments = $arguments;
     $session   = Services::session();

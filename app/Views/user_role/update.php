@@ -14,7 +14,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 ?>
 
 <div class="card pt-3">
-  <?= form_open("user-role/update/single", "name='userRole'") ?>
+  <?= form_open("user-role/update/single", ["name" => "userRole", "autocomplete" => "off"]) ?>
 
   <div class="card-body">
     <div id="alert"></div>
@@ -43,4 +43,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 <script type="text/javascript">
   const USER_ROLE_ENTITY = JSON.parse("<?= addslashes(json_encode($userRoleEntity)) ?>");
 </script>
-<script defer type="module" src="<?= base_url("public/js/user_role/update.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/user_role/update.js?v=") . APP_VERSION ?>"></script>

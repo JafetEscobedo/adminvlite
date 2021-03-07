@@ -25,8 +25,8 @@ $segment4 = $request->uri->getSegment(4) ?? '';
 
         <ul class="navbar-nav ml-auto">
           <li class="nav-item dropdown user-menu">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-              <img src="<?= base_url("public/img/avatar.png") ?>" class="user-image img-circle elevation-1" alt="User Image">
+            <a href="#" class="nav-link dropdown-toggle d-flex align-items-center justify-content-end" data-toggle="dropdown">
+              <img src="<?= base_url("public/img/avatar.png") ?>" class="user-image img-circle elevation-1 m-0 mr-2" alt="User Image">
               <span class="d-none d-md-inline"><?= session("user_name") ?> <?= session("user_surname") ?></span>
             </a>
 
@@ -37,8 +37,8 @@ $segment4 = $request->uri->getSegment(4) ?? '';
                 <p><?= session("user_nickname") ?></p>
               </li>
               <li class="user-footer">
-                <a href="<?= base_url("offsite/action/logout") ?>" class="btn btn-default btn-sm float-right">
-                  <i class="fas fa-fw fa-sign-out-alt text-danger"></i>&nbsp;&nbsp;Salir
+                <a href="<?= base_url("offsite/action/logout") ?>" class="btn btn-sm bg-gradient-danger float-right">
+                  <i class="fas fa-fw fa-sign-out-alt"></i>&nbsp;&nbsp;Salir
                 </a>
               </li>
             </ul>
@@ -100,9 +100,9 @@ $segment4 = $request->uri->getSegment(4) ?? '';
       </div>
 
       <footer class="main-footer">
-        <strong>Copyright &copy; 2021 <a href="#">AdminvLite</a></strong>
+        <strong>Copyright &copy; <?= date('Y') ?> <a href="#">AdminvLite</a></strong>
         <div class="float-right d-none d-sm-inline-block">
-          <b>Versión</b> 1.1.1
+          <b>Versión</b> <?= APP_VERSION ?>
         </div>
       </footer>
     </div>

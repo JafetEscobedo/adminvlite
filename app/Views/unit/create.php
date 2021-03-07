@@ -12,7 +12,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 
 <div class="card pt-3">
 
-  <?= form_open("unit/create/single", "name='unit'") ?>
+  <?= form_open("unit/create/single", ["name" => "unit", "autocomplete" => "off"]) ?>
 
   <div class="card-body">
     <div id="alert"></div>
@@ -27,4 +27,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   <?= form_close() ?>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/unit/create.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/unit/create.js?v=") . APP_VERSION ?>"></script>

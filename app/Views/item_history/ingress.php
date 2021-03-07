@@ -25,21 +25,21 @@ view(
       </div>
     </div>
 
-    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code"]) ?>
+    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code", "autocomplete" => "false"]) ?>
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">
           <label for="itemCode">Código de artículo</label>
           <div class="input-group">
             <div class="input-group-prepend">
-              <a target="_blank" href="<?= base_url("item/view/create") ?>" title="Crear artículo" class="btn btn-sm btn-default">
-                <i class="fas fa-fw fa-plus-circle text-success"></i>
+              <a target="_blank" href="<?= base_url("item/view/create") ?>" title="Crear artículo" class="btn btn-sm bg-gradient-success">
+                <i class="fas fa-fw fa-plus-circle"></i>
               </a>
             </div>
             <input autofocus id="itemCode" type="text" class="form-control form-control-sm" placeholder="12345678910" required>
             <div class="input-group-append">
-              <button id="btnValidateItemCode" title="Validar código" type="button" class="btn btn-sm btn-default">
-                <i class="fas fa-fw fa-check-circle text-primary"></i>
+              <button id="btnValidateItemCode" title="Validar código" type="button" class="btn btn-sm bg-gradient-primary">
+                <i class="fas fa-fw fa-check-circle"></i>
               </button>
             </div>
           </div>
@@ -108,4 +108,4 @@ view(
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/item_history/ingress.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/item_history/ingress.js?v=") . APP_VERSION ?>"></script>

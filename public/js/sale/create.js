@@ -43,8 +43,8 @@ const dtItemsBatch = $("#itemsBatch").DataTable({
     {render: data => app.toCurrency(data.itemHistoryStockOnMove * data.itemPrice)},
     {
       render: data => `
-        <button title="Remover" class="btn btn-sm btn-remove-row btn-default" data-item-id="${data.itemId}">
-          <i class="fas fa-fw fa-times-circle text-danger"></i>
+        <button title="Remover" class="btn btn-sm btn-remove-row bg-gradient-danger" data-item-id="${data.itemId}">
+          <i class="fas fa-fw fa-times-circle"></i>
         </button>`
     }
   ]

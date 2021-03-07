@@ -19,7 +19,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
       </div>
     </div>
 
-    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code"]) ?>
+    <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code", "autocomplete" => "off"]) ?>
     <div class="row">
       <div class="col-md-5">
         <div class="form-group">
@@ -88,4 +88,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/item_history/egress.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/item_history/egress.js?v=") . APP_VERSION ?>"></script>

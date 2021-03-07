@@ -3,16 +3,21 @@ view("_shared/partial/app_breadcrumb", ["links" => [
     [
       "text" => "Usuario",
       "href" => base_url("user")
-    ], [
+    ],
+    [
       "text" => "Lista de usuarios",
       "href" => base_url("user/view/users-list")
     ],
+    [
+      "text" => "Actualizar usuario",
+      "href" => "#"
+    ]
 ]])
 ?>
 
 <div class="card pt-3">
 
-  <?= form_open("user/update/single", "name='user'") ?>
+  <?= form_open("user/update/single", ["name" => "user", "autocomplete" => "off"]) ?>
 
   <div class="card-body">
     <div id="alert"></div>
@@ -44,4 +49,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 <script type="text/javascript">
   const USER_ENTITY = JSON.parse("<?= addslashes(json_encode($userEntity)) ?>");
 </script>
-<script defer type="module" src="<?= base_url("public/js/user/update.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/user/update.js?v=") . APP_VERSION ?>"></script>
