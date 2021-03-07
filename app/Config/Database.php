@@ -2,12 +2,12 @@
 
 namespace Config;
 
+use CodeIgniter\Database\Config;
+
 /**
  * Database Configuration
- *
- * @package Config
  */
-class Database extends \CodeIgniter\Database\Config
+class Database extends Config
 {
   /**
    * The directory that holds the Migrations
@@ -15,7 +15,7 @@ class Database extends \CodeIgniter\Database\Config
    *
    * @var string
    */
-  public $filesPath    = APPPATH . 'Database/';
+  public $filesPath = APPPATH . 'Database' . DIRECTORY_SEPARATOR;
   /**
    * Lets you choose which connection group to
    * use if no other is specified.
@@ -28,7 +28,7 @@ class Database extends \CodeIgniter\Database\Config
    *
    * @var array
    */
-  public $default      = [
+  public $default = [
     'DSN'      => '',
     'hostname' => 'localhost',
     'username' => 'root',
@@ -38,8 +38,6 @@ class Database extends \CodeIgniter\Database\Config
     'DBPrefix' => '',
     'pConnect' => false,
     'DBDebug'  => (ENVIRONMENT !== 'production'),
-    'cacheOn'  => false,
-    'cacheDir' => '',
     'charset'  => 'utf8',
     'DBCollat' => 'utf8_general_ci',
     'swapPre'  => '',
@@ -47,7 +45,7 @@ class Database extends \CodeIgniter\Database\Config
     'compress' => false,
     'strictOn' => false,
     'failover' => [],
-    'port'     => 3306
+    'port'     => 3306,
   ];
   /**
    * This database connection is used when
@@ -55,7 +53,7 @@ class Database extends \CodeIgniter\Database\Config
    *
    * @var array
    */
-  public $tests        = [
+  public $tests = [
     'DSN'      => '',
     'hostname' => '127.0.0.1',
     'username' => '',
@@ -65,8 +63,6 @@ class Database extends \CodeIgniter\Database\Config
     'DBPrefix' => 'db_', // Needed to ensure we're working correctly with prefixes live. DO NOT REMOVE FOR CI DEVS
     'pConnect' => false,
     'DBDebug'  => (ENVIRONMENT !== 'production'),
-    'cacheOn'  => false,
-    'cacheDir' => '',
     'charset'  => 'utf8',
     'DBCollat' => 'utf8_general_ci',
     'swapPre'  => '',
@@ -74,7 +70,7 @@ class Database extends \CodeIgniter\Database\Config
     'compress' => false,
     'strictOn' => false,
     'failover' => [],
-    'port'     => 3306
+    'port'     => 3306,
   ];
 
   //--------------------------------------------------------------------
@@ -86,20 +82,9 @@ class Database extends \CodeIgniter\Database\Config
     // Ensure that we always set the database group to 'tests' if
     // we are currently running an automated test suite, so that
     // we don't overwrite live data on accident.
-    if (ENVIRONMENT === 'testing') {
+    if (ENVIRONMENT === 'testing')
+    {
       $this->defaultGroup = 'tests';
-
-      // Under Travis-CI, we can set an ENV var named 'DB_GROUP'
-      // so that we can test against multiple databases.
-      if ($group = getenv('DB')) {
-        if (is_file(TESTPATH . 'travis/Database.php')) {
-          require TESTPATH . 'travis/Database.php';
-
-          if (!empty($dbconfig) && array_key_exists($group, $dbconfig)) {
-            $this->tests = $dbconfig[$group];
-          }
-        }
-      }
     }
   }
   //--------------------------------------------------------------------
