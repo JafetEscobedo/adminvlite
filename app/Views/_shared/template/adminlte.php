@@ -100,9 +100,9 @@ $segment4 = $request->uri->getSegment(4) ?? '';
       </div>
 
       <footer class="main-footer">
-        <strong>Copyright &copy; 2020 <a href="#">AdminvLite</a></strong>
+        <strong>Copyright &copy; 2021 <a href="#">AdminvLite</a></strong>
         <div class="float-right d-none d-sm-inline-block">
-          <b>Versión</b> 1.0.0
+          <b>Versión</b> 1.0.1
         </div>
       </footer>
     </div>
