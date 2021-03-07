@@ -13,7 +13,7 @@ view("_shared/partial/app_breadcrumb",
 
 <div class="card pt-3">
 
-  <?= form_open("user/create/single", "name='user'") ?>
+  <?= form_open("user/create/single", ["name" => "user", "autocomplete" => "off"]) ?>
 
   <div class="card-body">
     <div id="alert"></div>
@@ -28,4 +28,4 @@ view("_shared/partial/app_breadcrumb",
   <?= form_close() ?>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/user/create.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/user/create.js?v=") . APP_VERSION ?>"></script>

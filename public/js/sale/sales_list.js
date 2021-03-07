@@ -103,11 +103,11 @@ const dtSalesList = $("#salesList").DataTable({
     }, {
       width: "80px",
       render: data => `
-        <button data-sale-serial="${data.saleSerial}" title="Ver detalles" type="button" class="btn-sale-details btn btn-xs btn-default">
-          <i class="fas fa-fw fa-list text-info"></i>
+        <button data-sale-serial="${data.saleSerial}" title="Ver detalles" type="button" class="btn-sale-details btn btn-xs bg-gradient-info">
+          <i class="fas fa-fw fa-list"></i>
         </button>
-        <a title="Cancelar venta" class="${data.saleCanceled == 'y' ? "disabled" : ''} btn btn-default btn-xs" href="${app.url("sale/view/cancel?saleSerial=" + data.saleSerial)}")">
-          <i class="fas fa-fw fa-ban text-danger"></i>
+        <a title="Cancelar venta" class="${data.saleCanceled == 'y' ? "disabled" : ''} btn btn-xs bg-gradient-danger" href="${app.url("sale/view/cancel?saleSerial=" + data.saleSerial)}")">
+          <i class="fas fa-fw fa-ban"></i>
         </a>`
     }]
 });

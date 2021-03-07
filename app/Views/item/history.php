@@ -30,4 +30,4 @@ view(
   const ITEM_ENTITY = JSON.parse("<?= addslashes(json_encode($itemEntity)) ?>");
   const ITEM_HISTORY_LIST = JSON.parse("<?= addslashes(json_encode($itemHistoryList)) ?>");
 </script>
-<script defer type="module" src="<?= base_url("public/js/item/history.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/item/history.js?v=") . APP_VERSION ?>"></script>

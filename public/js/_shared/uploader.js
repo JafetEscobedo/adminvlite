@@ -33,12 +33,12 @@ export default function uploader(config) {
       message: config.confirmMessage,
       buttons: {
         confirm: {
-          label: `<i class="fas fa-fw fa-check-circle text-primary"></i>&nbsp;&nbsp;Sí, continuar`,
-          className: "btn-default btn-sm"
+          label: `<i class="fas fa-fw fa-check-circle"></i>&nbsp;&nbsp;Sí, continuar`,
+          className: "btn btn-sm bg-gradient-primary"
         },
         cancel: {
-          label: `<i class="fas fa-fw fa-times-circle text-gray"></i>&nbsp;&nbsp;No, cancelar`,
-          className: "btn-default btn-sm"
+          label: `<i class="fas fa-fw fa-times-circle"></i>&nbsp;&nbsp;No, cancelar`,
+          className: "btn btn-sm bg-gradient-secondary"
         }
       },
       callback: result => {

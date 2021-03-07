@@ -33,8 +33,8 @@ view("_shared/partial/app_breadcrumb", ["links" => [
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
-              <a href="<?= base_url("item/view/create") ?>" title="Crear artículo" class="btn btn-sm btn-default">
-                <i class="fas fa-fw fa-plus-circle text-success"></i>
+              <a href="<?= base_url("item/view/create") ?>" title="Crear artículo" class="btn btn-sm bg-gradient-success">
+                <i class="fas fa-fw fa-plus-circle"></i>
               </a>
             </div>
             <input autofocus class="form-control form-control-sm" id="itemsListSearch" type="search" placeholder="Buscar">
@@ -71,4 +71,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/item/items_list.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/item/items_list.js?v=") . APP_VERSION ?>"></script>

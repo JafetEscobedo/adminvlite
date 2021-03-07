@@ -33,8 +33,8 @@ view("_shared/partial/app_breadcrumb", ["links" => [
         <div class="form-group">
           <div class="input-group">
             <div class="input-group-prepend">
-              <a href="<?= base_url("user-role/view/create") ?>" title="Crear unidad" class="btn btn-sm btn-default">
-                <i class="fas fa-fw fa-plus-circle text-success"></i>
+              <a href="<?= base_url("user-role/view/create") ?>" title="Crear unidad" class="btn btn-sm bg-gradient-success">
+                <i class="fas fa-fw fa-plus-circle"></i>
               </a>
             </div>
             <input autofocus id="userRolesListSearch" type="search" class="form-control form-control-sm" placeholder="Buscar por nombre">
@@ -66,4 +66,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/user_role/user_roles_list.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/user_role/user_roles_list.js?v=") . APP_VERSION ?>"></script>

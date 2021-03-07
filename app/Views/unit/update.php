@@ -15,7 +15,7 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 
 <div class="card pt-3">
 
-  <?= form_open("unit/update/single", "name='unit'") ?>
+  <?= form_open("unit/update/single", ["name" => "unit", "autocomplete" => "off"]) ?>
 
   <div class="card-body">
     <div id="alert"></div>
@@ -46,4 +46,4 @@ view("_shared/partial/app_breadcrumb", ["links" => [
 <script type="text/javascript">
   const UNIT_ENTITY = JSON.parse("<?= addslashes(json_encode($unitEntity)) ?>");
 </script>
-<script defer type="module" src="<?= base_url("public/js/unit/update.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/unit/update.js?v=") . APP_VERSION ?>"></script>

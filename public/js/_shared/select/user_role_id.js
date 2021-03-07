@@ -9,7 +9,7 @@ const initSelect2 = () => {
     width: "100%",
     placeholder: "Administrador",
     minimumResultsForSearch: limit,
-    minimumInputLength: 0,
+    minimumInputLength: 1,
     language: "es",
     ajax: {
       delay: 250,

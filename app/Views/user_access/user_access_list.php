@@ -67,4 +67,4 @@ view(
   </div>
 </div>
 
-<script defer type="module" src="<?= base_url("public/js/user_access/user_access_list.js") ?>"></script>
+<script defer type="module" src="<?= base_url("public/js/user_access/user_access_list.js?v=") . APP_VERSION ?>"></script>

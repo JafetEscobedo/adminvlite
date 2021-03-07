@@ -98,11 +98,11 @@ const dtInventory = $("#inventoryTable").DataTable({
             </span>`
     }, {
       render: data => `
-        <a title="Actualizar" class="btn btn-default btn-xs" href="${app.url("item/view/items-list/update/" + data.itemId)}")">
-          <i class="fas fa-fw fa-pencil-alt text-info"></i>
+        <a title="Actualizar" class="btn btn-xs bg-gradient-info" href="${app.url("item/view/items-list/update/" + data.itemId)}")">
+          <i class="fas fa-fw fa-pencil-alt"></i>
         </a>
-        <a title="Historial" class="btn btn-default btn-xs" href="${app.url("item/view/items-list/history/" + data.itemId)}")">
-          <i class="fas fa-fw fa-history text-purple"></i>
+        <a title="Historial" class="btn btn-xs bg-gradient-purple" href="${app.url("item/view/items-list/history/" + data.itemId)}")">
+          <i class="fas fa-fw fa-history"></i>
         </a>`
     }]
 });

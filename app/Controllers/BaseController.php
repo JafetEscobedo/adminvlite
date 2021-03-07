@@ -34,8 +34,7 @@ class BaseController extends Controller
 
   public function sessionRouter(): ResponseInterface
   {
-    $firstRoute = json_decode($this->session->get("user_role_access"))[0];
-    return redirect($firstRoute);
+    return redirect($this->template->getFirstSessionUri());
   }
 
   private function configureBusiness(): void
