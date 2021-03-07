@@ -102,7 +102,7 @@ $segment4 = $request->uri->getSegment(4) ?? '';
       <footer class="main-footer">
         <strong>Copyright &copy; 2021 <a href="#">AdminvLite</a></strong>
         <div class="float-right d-none d-sm-inline-block">
-          <b>Versión</b> 1.0.1
+          <b>Versión</b> 1.1.1
         </div>
       </footer>
     </div>
