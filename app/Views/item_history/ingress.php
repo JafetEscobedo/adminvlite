@@ -26,6 +26,15 @@ view(
     </div>
 
     <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code", "autocomplete" => "false"]) ?>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <b>Artículo:</b>
+        <span class="text-muted" id="itemSummary">
+          <small><i>Ningún artículo en panel de espera</i></small>
+        </span>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-md-6">
         <div class="form-group">

@@ -8,6 +8,7 @@ let currentItem = {};
 
 const batch = [];
 const formReadItem = document.readItem;
+const divItemSummary = document.getElementById("itemSummary");
 const txtItemHistoryStockOnMove = document.getElementById("itemHistoryStockOnMove");
 const txtItemPrice = document.getElementById("itemPrice");
 const txtItemCost = document.getElementById("itemCost");
@@ -122,6 +123,7 @@ const clearEntries = () => {
 
 const clearInputs = () => {
   codeValidated = false;
+  divItemSummary.innerHTML = `<small><i>Ningún artículo en el panel de espera</i></small>`;
   txtItemCode.value = '';
   txtItemHistoryStockOnMove.value = '';
   txtItemCost.value = '';
@@ -157,7 +159,8 @@ btnValidateItemCode.onclick = async () => {
     const uri = formReadItem.dataset.uri + (txtItemCode.value.trim() ? '/' + txtItemCode.value.trim() : '');
     const fetched = await requester.submitSimpleRequest(uri);
 
-    // Recuperar datos para una posible modificación
+    // El precio y costo se pueden actualizar en este panel
+    divItemSummary.innerHTML = `${fetched.result.itemName} - ${fetched.result.itemDescription}`;
     txtItemCost.value = fetched.result.itemCost;
     txtItemPrice.value = fetched.result.itemPrice;
 
