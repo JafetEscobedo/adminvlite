@@ -5,7 +5,7 @@ const formUserRole = document.userRole;
 const btnSave = document.getElementById("btnSave");
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 formUserRole.userRoleName.focus();
@@ -28,7 +28,7 @@ formUserRole.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

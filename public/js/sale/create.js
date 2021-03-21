@@ -38,7 +38,7 @@ const dtItemsBatch = $("#itemsBatch").DataTable({
   columns: [
     {data: "itemCode"},
     {data: "itemName"},
-    {render: data => `${data.itemHistoryStockOnMove} ${data.itemHistoryStockOnMove == 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemHistoryStockOnMove} ${Number.parseInt(data.itemHistoryStockOnMove) === 1 ? data.unitSingularName : data.unitPluralName}`},
     {render: data => app.toCurrency(data.itemPrice)},
     {render: data => app.toCurrency(data.itemHistoryStockOnMove * data.itemPrice)},
     {
@@ -62,7 +62,7 @@ const validInputs = () => {
     return false;
   }
 
-  if (txtItemCode.value.trim().length == 0) {
+  if (txtItemCode.value.trim().length === 0) {
     app.renderAlert({
       autohide: false,
       container: "alert",
@@ -100,9 +100,9 @@ formReadItem.onsubmit = async e => {
     currentItem.saleSerial = null;
     currentItem.saleCancelNote = null;
 
-    const existing = batch.findIndex(el => el.itemId == currentItem.itemId);
+    const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
-    if (existing != -1) {
+    if (existing !== -1) {
       const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
       currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
       dtItemsBatch.row(tr).data(currentItem).draw(false);
@@ -119,7 +119,7 @@ formReadItem.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {
@@ -143,7 +143,7 @@ tbItemsBatch.onclick = e => {
   }
 
   if (itemId) {
-    const batchIndex = batch.findIndex(entry => entry.itemId == itemId);
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
     dtItemsBatch.row(btn.parentNode.parentNode).remove().draw(false);
     batch.splice(batchIndex, 1);
     app.rebuildTooltips();
@@ -152,7 +152,7 @@ tbItemsBatch.onclick = e => {
 };
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 $modalConfirm.on("shown.bs.modal", () => {
@@ -244,7 +244,7 @@ class ConfirmSale extends React.Component {
         app.renderAlert({
           autohide: false,
           container: "alertToConfirmSale",
-          message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+          message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
           type: "danger"
         });
       } finally {
@@ -257,7 +257,7 @@ class ConfirmSale extends React.Component {
 
       if (!Number.isNaN(Number.parseFloat(value)))
         value = Math.abs(Number.parseFloat(value));
-      else if (value.length == 0)
+      else if (value.length === 0)
         value = 0;
       else
         value = this.state.cash;

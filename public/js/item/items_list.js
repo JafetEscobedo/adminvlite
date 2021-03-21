@@ -51,7 +51,7 @@ const dtItemsList = $("#itemsList").DataTable({
       app.renderAlert({
         autohide: false,
         container: "alert",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
         type: "danger"
       });
       setdata({
@@ -77,9 +77,9 @@ const dtItemsList = $("#itemsList").DataTable({
       render: data => app.toCurrency(data.itemPrice)
     }, {
       name: "itemActive",
-      render: data => data.itemActive == 'y'
-         ? `<span class="badge badge-success">Activo</span>`
-         : `<span class="badge badge-danger">Inactivo</span>`
+      render: data => data.itemActive === 'y'
+                ? `<span class="badge badge-success">Activo</span>`
+                : `<span class="badge badge-danger">Inactivo</span>`
     }, {
       data: "itemBrand"
     }, {

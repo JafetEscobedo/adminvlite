@@ -68,8 +68,8 @@ class UserModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -89,8 +89,8 @@ class UserModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -106,8 +106,8 @@ class UserModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -128,8 +128,8 @@ class UserModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -164,8 +164,8 @@ class UserModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -189,8 +189,8 @@ class UserModel extends Model
       $this->orderBy($ordering["column"], mb_strtoupper($ordering["order"]));
     }
 
-    $config["status"] == "active" && $this->where("user.user_active", 'y');
-    $config["status"] == "inactive" && $this->where("user.user_active", 'n');
+    $config["status"] === "active" && $this->where("user.user_active", 'y');
+    $config["status"] === "inactive" && $this->where("user.user_active", 'n');
   }
 
   private function buildFilterQuery(array $config): void
@@ -226,15 +226,15 @@ class UserModel extends Model
     {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
     $columns = explode(',', trim($config["column"], ','));
     $orders  = explode(',', trim($config["order"], ','));
 
-    if (count($columns) != count($orders))
+    if (count($columns) !== count($orders))
     {
       throw new Exception("La relación entre columna y orden no es correcta");
     }

@@ -6,7 +6,7 @@ const formUser = document.user;
 const btnSave = document.getElementById("btnSave");
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 selUserRoleId.initSelect2();
@@ -17,7 +17,7 @@ formUser.onsubmit = async e => {
     app.loading(true);
 
     // Validar contraseñas
-    if (formUser.userPassword.value.trim() != formUser.userPasswordConfirm.value.trim()) {
+    if (formUser.userPassword.value.trim() !== formUser.userPasswordConfirm.value.trim()) {
       throw "Las contraseñas no coinciden";
     }
 
@@ -41,7 +41,7 @@ formUser.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

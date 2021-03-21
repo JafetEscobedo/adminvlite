@@ -13,7 +13,7 @@
           </p>
         </div>
         <div class="card-body">
-          <p class="<?= session("business_name_uc") == 'y' ? "text-uppercase" : '' ?> login-box-msg h6">
+          <p class="<?= session("business_name_uc") === 'y' ? "text-uppercase" : '' ?> login-box-msg h6">
             <?= session("business_name") ?>
           </p>
 

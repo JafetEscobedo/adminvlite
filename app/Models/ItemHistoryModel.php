@@ -53,8 +53,8 @@ class ItemHistoryModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -72,7 +72,7 @@ class ItemHistoryModel extends Model
       $itemHistoryEventEntity = $itemHistoryEventModel->readSingle($element->itemHistoryEventId ?? 1);
       $itemStock              = $this->readStockByItemId($element->itemId);
 
-      if (abs($element->itemHistoryStockOnMove) == 0)
+      if (abs((int) $element->itemHistoryStockOnMove) === 0)
       {
         throw new Exception("Cantidad indicada para {$itemEntity->itemCode} - {$itemEntity->itemName} no puede ser 0");
       }
@@ -131,8 +131,8 @@ class ItemHistoryModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -153,8 +153,8 @@ class ItemHistoryModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -180,8 +180,8 @@ class ItemHistoryModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -219,8 +219,8 @@ class ItemHistoryModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -276,15 +276,15 @@ class ItemHistoryModel extends Model
     {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
     $columns = explode(',', trim($config["column"], ','));
     $orders  = explode(',', trim($config["order"], ','));
 
-    if (count($columns) != count($orders))
+    if (count($columns) !== count($orders))
     {
       throw new Exception("La relación entre columna y orden no es correcta");
     }

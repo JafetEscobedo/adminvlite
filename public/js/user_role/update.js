@@ -25,7 +25,7 @@ JSON.parse(USER_ROLE_ENTITY.userRoleAccess).forEach(path => {
 });
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 formUserRole.onsubmit = async e => {
@@ -46,7 +46,7 @@ formUserRole.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

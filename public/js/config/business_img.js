@@ -15,7 +15,7 @@ const renderPreview = (containerId, files) => {
 
   label.setAttribute("for", input.id);
 
-  if (files.length == 0) {
+  if (files.length === 0) {
     container.innerHTML = '';
     container.appendChild(dropzone);
     return;
@@ -32,7 +32,7 @@ const renderPreview = (containerId, files) => {
 
     fragment.appendChild(thumbnail);
 
-    if ((i + 1) == files.length) {
+    if ((i + 1) === files.length) {
       container.innerHTML = '';
       container.appendChild(fragment);
       container.appendChild(dropzone);
@@ -69,7 +69,7 @@ uploader({
     app.renderAlert({
       autohide: false,
       container: "alertForBusinessLogo",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   }
@@ -104,7 +104,7 @@ uploader({
     app.renderAlert({
       autohide: false,
       container: "alertForBusinessIcon",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   }

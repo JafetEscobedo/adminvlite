@@ -62,8 +62,8 @@ class SaleModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -85,8 +85,8 @@ class SaleModel extends Model
     $this->orLike("sale.sale_cancel_note", $config["needle"]);
     $this->groupEnd();
 
-    $config["status"] == "canceled" && $this->where("sale.sale_canceled", 'y');
-    $config["status"] == "not_canceled" && $this->where("sale.sale_canceled", 'n');
+    $config["status"] === "canceled" && $this->where("sale.sale_canceled", 'y');
+    $config["status"] === "not_canceled" && $this->where("sale.sale_canceled", 'n');
 
     if (!empty($sdate) && !empty($fdate))
     {
@@ -153,15 +153,15 @@ class SaleModel extends Model
     {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
     $orders  = explode(',', trim($config["order"], ','));
     $columns = explode(',', trim($config["column"], ','));
 
-    if (count($columns) != count($orders))
+    if (count($columns) !== count($orders))
     {
       throw new Exception("La relación entre columna y orden no es correcta");
     }
@@ -207,8 +207,8 @@ class SaleModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -224,8 +224,8 @@ class SaleModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -246,8 +246,8 @@ class SaleModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -282,8 +282,8 @@ class SaleModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -309,9 +309,9 @@ class SaleModel extends Model
 
       $itemEntity      = $itemModel->readSingle($element->itemId);
       $itemStock       = $itemHistoryModel->readStockByItemId($itemEntity->itemId);
-      $itemStockOnMove = abs($element->itemHistoryStockOnMove);
+      $itemStockOnMove = abs((int) $element->itemHistoryStockOnMove);
 
-      if ($itemStockOnMove == 0)
+      if ($itemStockOnMove === 0)
       {
         throw new Exception("Cantidad de venta para {$itemEntity->itemCode} - {$itemEntity->itemName} no puede ser 0");
       }
@@ -389,8 +389,8 @@ class SaleModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 

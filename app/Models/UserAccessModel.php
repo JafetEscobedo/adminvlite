@@ -36,18 +36,18 @@ class UserAccessModel extends Model
   {
     $this->where("user_access_first >=", Time::today()->toDateTimeString());
     $this->where("user_id", $userId);
-    $result = $this->countAllResults();
+    $result = (int) $this->countAllResults();
     $errors = $this->errors();
 
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
-    return $result == 1;
+    return $result === 1;
   }
 
   public function updateSingle(UserAccessEntity &$userAccessEntity): UserAccessEntity
@@ -58,8 +58,8 @@ class UserAccessModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -76,8 +76,8 @@ class UserAccessModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -93,8 +93,8 @@ class UserAccessModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -117,8 +117,8 @@ class UserAccessModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -153,8 +153,8 @@ class UserAccessModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -233,15 +233,15 @@ class UserAccessModel extends Model
     {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
     $orders  = explode(',', trim($config["order"], ','));
     $columns = explode(',', trim($config["column"], ','));
 
-    if (count($columns) != count($orders))
+    if (count($columns) !== count($orders))
     {
       throw new Exception("La relación entre columna y orden no es correcta");
     }

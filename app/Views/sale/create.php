@@ -97,7 +97,7 @@ view(
         <div class="form-group row">
           <label for="cash" class="col-sm-4 col-form-label text-uppercase d-flex align-items-center">Efectivo:</label>
           <div class="col-sm-8">
-            <input type="number" step="0.01" class="text-bold form-control form-control-lg" name="cash" id="cash">
+            <input type="number" step="0.01" class="text-bold form-control form-control-lg" name="cash" id="cash" required>
           </div>
         </div>
         <div class="form-group row">

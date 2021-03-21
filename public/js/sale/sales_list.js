@@ -55,7 +55,7 @@ const dtSalesList = $("#salesList").DataTable({
         autohide: false,
         container: "alert",
         type: "danger",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
       });
       setdata({
         recordsTotal: 0,
@@ -74,9 +74,9 @@ const dtSalesList = $("#salesList").DataTable({
       render: data => `<span title="${data.userFullName}">${data.userNickname}</span>`
     }, {
       name: "saleCanceled",
-      render: data => data.saleCanceled == 'y'
-         ? `<span class="badge badge-danger">Cancelada</span>`
-         : `<span class="badge badge-success">No cancelada</span>`
+      render: data => data.saleCanceled === 'y'
+                ? `<span class="badge badge-danger">Cancelada</span>`
+                : `<span class="badge badge-success">No cancelada</span>`
     }, {
       name: "saleTotalCost",
       render: data => app.toCurrency(data.saleTotalCost)
@@ -96,8 +96,8 @@ const dtSalesList = $("#salesList").DataTable({
     }, {
       name: "saleCanceledAt",
       render: data => !data.saleCanceledAt
-         ? `<small class="text-muted font-italic">No aplica</small>`
-         : `<span title="${moment(data.saleCanceledAt).format(app.dateFormat)}">
+                ? `<small class="text-muted font-italic">No aplica</small>`
+                : `<span title="${moment(data.saleCanceledAt).format(app.dateFormat)}">
               ${moment(data.saleCanceledAt).fromNow()}
             </span>`
     }, {
@@ -106,7 +106,7 @@ const dtSalesList = $("#salesList").DataTable({
         <button data-sale-serial="${data.saleSerial}" title="Ver detalles" type="button" class="btn-sale-details btn btn-xs bg-gradient-info">
           <i class="fas fa-fw fa-list"></i>
         </button>
-        <a title="Cancelar venta" class="${data.saleCanceled == 'y' ? "disabled" : ''} btn btn-xs bg-gradient-danger" href="${app.url("sale/view/cancel?saleSerial=" + data.saleSerial)}")">
+        <a title="Cancelar venta" class="${data.saleCanceled === 'y' ? "disabled" : ''} btn btn-xs bg-gradient-danger" href="${app.url("sale/view/cancel?saleSerial=" + data.saleSerial)}")">
           <i class="fas fa-fw fa-ban"></i>
         </a>`
     }]
@@ -157,7 +157,7 @@ tbSalesList.onclick = async e => {
         autohide: false,
         container: "alertToSaleDetailsList",
         type: "danger",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
       });
     } finally {
       dtSaleDetailsList.processing(false);

@@ -86,7 +86,7 @@ if (!class_exists("Template"))
     {
       foreach ($this->data["templateMenu"] as $templateMenu)
       {
-        if ($templateMenu["path"] == $uri)
+        if ($templateMenu["path"] === $uri)
         {
           return !empty($templateMenu["menu"]);
         }

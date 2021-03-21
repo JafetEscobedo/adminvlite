@@ -38,7 +38,7 @@ class UserEntity extends BaseEntity
 
   public function isActive(): bool
   {
-    return $this->attributes["user_active"] == 'y';
+    return $this->attributes["user_active"] === 'y';
   }
 
   public function setUserName(string $value): void

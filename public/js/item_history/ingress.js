@@ -36,14 +36,14 @@ const dtIngressBatch = $("#ingressBatch").DataTable({
   columns: [
     {data: "itemCode"},
     {data: "itemName"},
-    {render: data => `${data.itemHistoryStockOnMove} ${data.itemHistoryStockOnMove == 1 ? data.unitSingularName : data.unitPluralName}`},
-    {render: data => `${data.itemStock} ${data.itemStock == 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemHistoryStockOnMove} ${Number.parseInt(data.itemHistoryStockOnMove) === 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemStock} ${Number.parseInt(data.itemStock) === 1 ? data.unitSingularName : data.unitPluralName}`},
     {render: data => app.toCurrency(data.itemCost)},
     {render: data => app.toCurrency(data.itemPrice)},
     {
       render: data => !data.itemLastEntry
-         ? `<small class="text-muted"><i>Sin registros</i></small>`
-         : `<span title="${moment(data.itemLastEntry).fromNow()} (${moment(data.itemLastEntry).format(app.dateFormat)})">
+                ? `<small class="text-muted"><i>Sin registros</i></small>`
+                : `<span title="${moment(data.itemLastEntry).fromNow()} (${moment(data.itemLastEntry).format(app.dateFormat)})">
               ${data.itemLastEntry}
             </span>`
     }, {
@@ -56,7 +56,7 @@ const dtIngressBatch = $("#ingressBatch").DataTable({
 });
 
 const validInputs = () => {
-  if (txtItemCode.value.trim().length == 0 || !codeValidated) {
+  if (txtItemCode.value.trim().length === 0 || !codeValidated) {
     app.renderAlert({
       autohide: false,
       container: "alert",
@@ -131,11 +131,11 @@ const clearInputs = () => {
 };
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 txtItemCode.onkeypress = e => {
-  if (e.key == "Enter") {
+  if (e.key === "Enter") {
     e.preventDefault();
     codeValidated = false;
     btnValidateItemCode.click();
@@ -143,7 +143,7 @@ txtItemCode.onkeypress = e => {
 };
 
 txtareaItemHistoryNote.onkeypress = e => {
-  if (e.key == "Enter") {
+  if (e.key === "Enter") {
     e.preventDefault();
     btnAdd.click();
   }
@@ -151,7 +151,7 @@ txtareaItemHistoryNote.onkeypress = e => {
 
 btnValidateItemCode.onclick = async () => {
   try {
-    if (txtItemCode.value.length == 0) throw "Tiene que agregar el código de artículo";
+    if (txtItemCode.value.length === 0) throw "Tiene que agregar el código de artículo";
 
     app.loading(true);
     const uri = formReadItem.dataset.uri + (txtItemCode.value.trim() ? '/' + txtItemCode.value.trim() : '');
@@ -171,7 +171,7 @@ btnValidateItemCode.onclick = async () => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {
@@ -190,9 +190,9 @@ formReadItem.onsubmit = e => {
   currentItem.itemHistoryNote = txtareaItemHistoryNote.value.trim();
   currentItem.itemHistoryEventId = null; // Entrada al inventario, en el back se asigna el ID correspondiente
 
-  const existing = batch.findIndex(el => el.itemId == currentItem.itemId);
+  const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
-  if (existing != -1) {
+  if (existing !== -1) {
     const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
     currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
     dtIngressBatch.row(tr).data(currentItem).draw(false);
@@ -220,7 +220,7 @@ tbIngressBatch.onclick = e => {
   }
 
   if (itemId) {
-    const batchIndex = batch.findIndex(entry => entry.itemId == itemId);
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
     txtItemCode.value = batch[batchIndex].itemCode;
     txtItemCode.focus();
     dtIngressBatch.row(btn.parentNode.parentNode).remove().draw(false);
@@ -231,7 +231,7 @@ tbIngressBatch.onclick = e => {
 
 btnSave.onclick = async () => {
   try {
-    if (batch.length == 0) throw "Tiene que agregar al menos un artículo";
+    if (batch.length === 0) throw "Tiene que agregar al menos un artículo";
 
     app.loading(true);
     const data = app.toFormData({itemHistoryJsonString: JSON.stringify(batch)});
@@ -253,7 +253,7 @@ btnSave.onclick = async () => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

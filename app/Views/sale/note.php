@@ -25,7 +25,7 @@
         <?= $details->itemName; ?>
       </td>
       <td style="text-align: right; word-wrap: break-word; vertical-align: top">
-        <?= $details->saleDetailStockOnMove ?> <?= $details->saleDetailStockOnMove == 1 ? $details->unitSingularName : $details->unitPluralName ?>
+        <?= $details->saleDetailStockOnMove ?> <?= (int) $details->saleDetailStockOnMove === 1 ? $details->unitSingularName : $details->unitPluralName ?>
       </td>
       <td style="text-align: right; word-wrap: break-word; vertical-align: top">
         <?= number_to_currency($details->saleDetailStockOnMove * $details->saleDetailItemPrice, "MXN", "es_MX", 2) ?>

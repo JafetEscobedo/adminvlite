@@ -29,27 +29,27 @@ $selItemActive.on("select2:select", () => app.rebuildTooltips());
 app.rebuildTooltips();
 
 requester
- .submitSimpleRequest("unit/read/single/" + ITEM_ENTITY.unitId)
- .then(fetched => {
-   const result = fetched.result;
-   selUnitId.setSelectedOption(result.unitId, `${result.unitSingularName} / ${result.unitPluralName}`);
- })
- .catch(err => {
-   console.log(err);
-   app.renderAlert({
-     autohide: false,
-     container: "alert",
-     message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
-     type: "danger"
-   });
- });
+        .submitSimpleRequest("unit/read/single/" + ITEM_ENTITY.unitId)
+        .then(fetched => {
+          const result = fetched.result;
+          selUnitId.setSelectedOption(result.unitId, `${result.unitSingularName} / ${result.unitPluralName}`);
+        })
+        .catch(err => {
+          console.log(err);
+          app.renderAlert({
+            autohide: false,
+            container: "alert",
+            message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+            type: "danger"
+          });
+        });
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 formItem.itemDescription.onkeypress = e => {
-  if (e.key == "Enter") {
+  if (e.key === "Enter") {
     e.preventDefault();
     btnSave.click();
   }
@@ -73,7 +73,7 @@ formItem.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

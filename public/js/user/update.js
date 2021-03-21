@@ -23,23 +23,23 @@ $selUserActive.on("select2:select", () => app.rebuildTooltips());
 app.rebuildTooltips();
 
 requester
- .submitSimpleRequest("user-role/read/single/" + USER_ENTITY.userRoleId)
- .then(fetched => {
-   const result = fetched.result;
-   selUserRoleId.setSelectedOption(result.userRoleId, result.userRoleName);
- })
- .catch(err => {
-   console.log(err);
-   app.renderAlert({
-     autohide: false,
-     container: "alert",
-     message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
-     type: "danger"
-   });
- });
+        .submitSimpleRequest("user-role/read/single/" + USER_ENTITY.userRoleId)
+        .then(fetched => {
+          const result = fetched.result;
+          selUserRoleId.setSelectedOption(result.userRoleId, result.userRoleName);
+        })
+        .catch(err => {
+          console.log(err);
+          app.renderAlert({
+            autohide: false,
+            container: "alert",
+            message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+            type: "danger"
+          });
+        });
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 formUser.onsubmit = async e => {
@@ -48,7 +48,7 @@ formUser.onsubmit = async e => {
     app.loading(true);
 
     // Validar contraseñas
-    if (formUser.userPassword.value.trim() != formUser.userPasswordConfirm.value.trim()) {
+    if (formUser.userPassword.value.trim() !== formUser.userPasswordConfirm.value.trim()) {
       throw "Las contraseñas no coinciden";
     }
 
@@ -69,7 +69,7 @@ formUser.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

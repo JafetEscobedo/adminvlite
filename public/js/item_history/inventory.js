@@ -47,7 +47,7 @@ const dtInventory = $("#inventoryTable").DataTable({
         autohide: false,
         container: "alert",
         type: "danger",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
       });
       setdata({
         recordsTotal: 0,
@@ -70,10 +70,10 @@ const dtInventory = $("#inventoryTable").DataTable({
     }, {
       data: "itemStock",
       createdCell: (td, cellData, rowData) => {
-        if (cellData == 0) {
+        if (Number.parseInt(cellData) === 0) {
           td.parentNode.style.fontWeight = "bold";
           td.parentNode.style.color = "#DC3545";
-        } else if (rowData.itemLowStock == 'y') {
+        } else if (rowData.itemLowStock === 'y') {
           td.parentNode.style.fontWeight = "bold";
           td.parentNode.style.color = "#FF851B";
         }
@@ -81,19 +81,19 @@ const dtInventory = $("#inventoryTable").DataTable({
     }, {
       name: "itemLastEntry",
       render: data => !data.itemLastIngress
-         ? `<small class="${data.itemStock == 0 ? "text-danger text-bold" : (data.itemLowStock == 'y' ? "text-warning text-bold" : "text-muted")}">
+                ? `<small class="${Number.parseInt(data.itemStock) === 0 ? "text-danger text-bold" : (data.itemLowStock === 'y' ? "text-warning text-bold" : "text-muted")}">
               <i>Sin registros</i>
             </small>`
-         : `<span title="${moment(data.itemLastIngress).format(app.dateFormat)}">
+                : `<span title="${moment(data.itemLastIngress).format(app.dateFormat)}">
               ${moment(data.itemLastIngress).fromNow()}
             </span>`
     }, {
       name: "itemLastEgress",
       render: data => !data.itemLastEgress
-         ? `<small class="${data.itemStock == 0 ? "text-danger text-bold" : (data.itemLowStock == 'y' ? "text-warning text-bold" : "text-muted")}">
+                ? `<small class="${Number.parseInt(data.itemStock) === 0 ? "text-danger text-bold" : (data.itemLowStock === 'y' ? "text-warning text-bold" : "text-muted")}">
               <i>Sin registros</i>
             </small>`
-         : `<span title="${moment(data.itemLastEgress).format(app.dateFormat)}">
+                : `<span title="${moment(data.itemLastEgress).format(app.dateFormat)}">
               ${moment(data.itemLastEgress).fromNow()}
             </span>`
     }, {

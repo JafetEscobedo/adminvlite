@@ -17,7 +17,7 @@ $selUnitActive.on("select2:select", () => app.rebuildTooltips());
 app.rebuildTooltips();
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 formUnit.onsubmit = async e => {
@@ -38,7 +38,7 @@ formUnit.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {
