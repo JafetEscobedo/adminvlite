@@ -116,7 +116,7 @@ export default {
 
   toast(conf = {}) {
     $(document).Toasts("create", {
-      autohide: typeof conf.autohide != "undefined" ? conf.autohide : true,
+      autohide: typeof conf.autohide !== "undefined" ? conf.autohide : true,
       body: conf.body || "Acción completada",
       class: "bg-" + (conf.className || "success"),
       delay: conf.delay || 5000,

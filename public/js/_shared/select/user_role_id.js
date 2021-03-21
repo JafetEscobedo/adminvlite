@@ -49,7 +49,7 @@ const initSelect2 = () => {
           app.toast({
             className: "danger",
             icon: "fa-times-circle",
-            body: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+            body: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
           });
 
           setdata({total: 0, filtered: 0, data: []});

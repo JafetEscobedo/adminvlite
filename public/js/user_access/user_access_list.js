@@ -38,7 +38,7 @@ const dtUserAccessList = $("#userAccessList").DataTable({
       app.renderAlert({
         autohide: false,
         container: "alert",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
         type: "danger"
       });
 
@@ -119,7 +119,7 @@ const initSelect2 = () => {
           app.renderAlert({
             autohide: false,
             container: "alert",
-            message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+            message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
             type: "danger"
           });
 

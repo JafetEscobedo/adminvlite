@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
 INSERT INTO `config` (`config_id`, `config_business_name`, `config_business_name_uc`, `config_business_logo`, `config_business_icon`, `config_created_at`, `config_updated_at`) VALUES
-	(1, 'AdminvLite', 'n', '20210125164844_adminvlite_logo.png', '210125165930_adminvlite_icon.png', '2021-01-05 12:05:51', '2021-01-27 11:18:16');
+	(1, 'AdminvLite', 'n', 'adminvlite_logo.png', 'adminvlite_icon.png', '2021-01-05 12:05:51', '2021-01-27 11:18:16');
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 
 CREATE TABLE IF NOT EXISTS `item` (

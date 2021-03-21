@@ -71,8 +71,8 @@ class ItemModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -88,8 +88,8 @@ class ItemModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -144,8 +144,8 @@ class ItemModel extends Model
     {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -163,8 +163,8 @@ class ItemModel extends Model
     if (!empty($errors))
     {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -208,8 +208,8 @@ class ItemModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -247,8 +247,8 @@ class ItemModel extends Model
       if ($err)
       {
         throw new Exception(json_encode([
-            "type" => gettype($err),
-            "data" => $err,
+              "type" => gettype($err),
+              "data" => $err,
         ]));
       }
     }
@@ -296,8 +296,8 @@ class ItemModel extends Model
     $this->select("IFNULL(($itemLastEgressQuery), '') AS itemLastEgress");
     $this->join("unit", "item.unit_id = unit.unit_id");
 
-    $config["status"] == "active" && $this->where("item.item_active", 'y');
-    $config["status"] == "inactive" && $this->where("item.item_active", 'n');
+    $config["status"] === "active" && $this->where("item.item_active", 'y');
+    $config["status"] === "inactive" && $this->where("item.item_active", 'n');
 
     foreach ($config["ordering"] as $ordering)
     {
@@ -342,15 +342,15 @@ class ItemModel extends Model
     {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
     $columns = explode(',', trim($config["column"], ','));
     $orders  = explode(',', trim($config["order"], ','));
 
-    if (count($columns) != count($orders))
+    if (count($columns) !== count($orders))
     {
       throw new Exception("La relación entre columna y orden no es correcta");
     }

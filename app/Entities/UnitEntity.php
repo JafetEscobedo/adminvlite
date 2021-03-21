@@ -25,7 +25,7 @@ class UnitEntity extends BaseEntity
 
   public function isActive(): bool
   {
-    return $this->attributes["unit_active"] == 'y';
+    return $this->attributes["unit_active"] === 'y';
   }
 
   public function setUnitSingularName(string $value): void

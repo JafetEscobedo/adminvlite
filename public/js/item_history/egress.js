@@ -33,8 +33,8 @@ const dtEgressBatch = $("#egressBatch").DataTable({
   columns: [
     {data: "itemCode"},
     {data: "itemName"},
-    {render: data => `${data.itemHistoryStockOnMove} ${data.itemHistoryStockOnMove == 1 ? data.unitSingularName : data.unitPluralName}`},
-    {render: data => `${data.itemStock} ${data.itemStock == 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemHistoryStockOnMove} ${Number.parseInt(data.itemHistoryStockOnMove) === 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemStock} ${Number.parseInt(data.itemStock) === 1 ? data.unitSingularName : data.unitPluralName}`},
     {render: data => app.toCurrency(data.itemCost)},
     {render: data => app.toCurrency(data.itemPrice)},
     {
@@ -120,11 +120,11 @@ const clearInputs = () => {
 };
 
 window.addEventListener("keyup", e => {
-  if (e.key == "F2") btnSave.click();
+  if (e.key === "F2") btnSave.click();
 });
 
 txtareaItemHistoryNote.onkeypress = e => {
-  if (e.key == "Enter") {
+  if (e.key === "Enter") {
     e.preventDefault();
     btnAdd.click();
   }
@@ -146,9 +146,9 @@ formReadItem.onsubmit = async e => {
     currentItem.itemHistoryNote = txtareaItemHistoryNote.value.trim();
     currentItem.itemHistoryEventId = $selItemHistoryEventId.val().trim();
 
-    const existing = batch.findIndex(el => el.itemId == currentItem.itemId);
+    const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
-    if (existing != -1) {
+    if (existing !== -1) {
       const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
       currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
       dtEgressBatch.row(tr).data(currentItem).draw(false);
@@ -166,7 +166,7 @@ formReadItem.onsubmit = async e => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {
@@ -189,7 +189,7 @@ tbEgressBatch.onclick = e => {
   }
 
   if (itemId) {
-    const batchIndex = batch.findIndex(entry => entry.itemId == itemId);
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
     txtItemCode.value = batch[batchIndex].itemCode;
     txtItemCode.focus();
     dtEgressBatch.row(btn.parentNode.parentNode).remove().draw(false);
@@ -200,7 +200,7 @@ tbEgressBatch.onclick = e => {
 
 btnSave.onclick = async () => {
   try {
-    if (batch.length == 0) throw "Tiene que agregar al menos un artículo";
+    if (batch.length === 0) throw "Tiene que agregar al menos un artículo";
 
     app.loading(true);
     const data = app.toFormData({itemHistoryJsonString: JSON.stringify(batch)});
@@ -220,7 +220,7 @@ btnSave.onclick = async () => {
     app.renderAlert({
       autohide: false,
       container: "alert",
-      message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+      message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
       type: "danger"
     });
   } finally {

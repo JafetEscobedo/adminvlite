@@ -6,8 +6,8 @@
 
         <div>
           <select class="opacity-0">
-            <option value="desc" <?= $order != "asc" ? "selected" : '' ?>>Movimientos recientes primero</option>
-            <option value="asc" <?= $order == "asc" ? "selected" : '' ?>>Movimientos antiguos primero</option>
+            <option value="desc" <?= $order !== "asc" ? "selected" : '' ?>>Movimientos recientes primero</option>
+            <option value="asc" <?= $order === "asc" ? "selected" : '' ?>>Movimientos antiguos primero</option>
           </select>
         </div>
       </div>

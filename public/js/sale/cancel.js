@@ -25,9 +25,9 @@ class CancelSale extends React.Component {
     formSale.onsubmit = this.handleFormSubmit;
 
     txtSalesSerial.onkeypress = e => {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         e.preventDefault();
-        if (txtSalesSerial.value.trim().length == 0) {
+        if (txtSalesSerial.value.trim().length === 0) {
           return app.renderAlert({
             autohide: false,
             container: "alert",
@@ -40,7 +40,7 @@ class CancelSale extends React.Component {
     };
 
     txtareaSaleCancelNote.onkeypress = e => {
-      if (e.key == "Enter") {
+      if (e.key === "Enter") {
         e.preventDefault();
         btnSubmitForm.click();
       }
@@ -71,7 +71,7 @@ class CancelSale extends React.Component {
         autohide: false,
         container: "alert",
         type: "danger",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
       });
     } finally {
       app.loading(false);
@@ -82,9 +82,9 @@ class CancelSale extends React.Component {
     try {
       app.loading(true);
       const fetched = await requester
-       .submitSimpleRequest(
-        `sale-detail/list/sale-details-by-sale-serial${txtSalesSerial.value.trim() ? `/${txtSalesSerial.value.trim()}` : ''}`
-        );
+              .submitSimpleRequest(
+                      `sale-detail/list/sale-details-by-sale-serial${txtSalesSerial.value.trim() ? `/${txtSalesSerial.value.trim()}` : ''}`
+                      );
       this.setState({saleDetails: fetched.result});
     } catch (err) {
       this.setState({saleDetails: []});
@@ -93,7 +93,7 @@ class CancelSale extends React.Component {
         autohide: false,
         container: "alert",
         type: "danger",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador"
       });
     } finally {
       app.loading(false);
@@ -110,12 +110,12 @@ class CancelSale extends React.Component {
 
       li.querySelector("h6").innerHTML = `<b>${saleDetail.itemCode} ${saleDetail.itemName}</b>`;
       li.querySelector("p").innerHTML = saleDetail.itemDescription;
-      li.querySelector("span").innerHTML = `${saleDetail.saleCanceled == 'y'
-       ? "Venta cancelada"
-       : "Venta realizada"} - ${saleDetail.saleDetailStockOnMove} ${saleDetail.saleDetailStockOnMove == 1
-       ? saleDetail.unitSingularName
-       : saleDetail.unitPluralName} a ${app.toCurrency(saleDetail.saleDetailItemPrice)} c/u`;
-      li.querySelector("span").classList.add(`${saleDetail.saleCanceled == 'y' ? "text-danger" : "text-success"}`);
+      li.querySelector("span").innerHTML = `${saleDetail.saleCanceled === 'y'
+              ? "Venta cancelada"
+              : "Venta realizada"} - ${saleDetail.saleDetailStockOnMove} ${Number.parseInt(saleDetail.saleDetailStockOnMove) === 1
+              ? saleDetail.unitSingularName
+              : saleDetail.unitPluralName} a ${app.toCurrency(saleDetail.saleDetailItemPrice)} c/u`;
+      li.querySelector("span").classList.add(`${saleDetail.saleCanceled === 'y' ? "text-danger" : "text-success"}`);
       fragment.appendChild(li);
     });
 

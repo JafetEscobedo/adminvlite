@@ -76,7 +76,7 @@ class History extends React.Component {
       offset: 0,
       limit: 100,
       order: timeline.querySelector("select").value,
-      allLoaded: ITEM_HISTORY_LIST.total == ITEM_HISTORY_LIST.data.length
+      allLoaded: Number.parseInt(ITEM_HISTORY_LIST.total) === ITEM_HISTORY_LIST.data.length
     };
   }
 
@@ -100,14 +100,14 @@ class History extends React.Component {
             offset: offset,
             order: order,
             history: history.result,
-            allLoaded: history.result.total == history.result.data.length
+            allLoaded: Number.parseInt(history.result.total) === history.result.data.length
           });
         } catch (err) {
           console.log(err);
           app.renderAlert({
             autohide: false,
             container: "alert",
-            message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+            message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
             type: "danger"
           });
         } finally {
@@ -136,7 +136,7 @@ class History extends React.Component {
 
           this.setState({
             offset: offset,
-            allLoaded: history.result.total == history.result.data.length + this.state.history.data.length,
+            allLoaded: Number.parseInt(history.result.total) === history.result.data.length + this.state.history.data.length,
             history: {
               total: history.result.total,
               filtered: history.result.filtered,
@@ -148,7 +148,7 @@ class History extends React.Component {
           app.renderAlert({
             autohide: false,
             container: "alert",
-            message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+            message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
             type: "danger"
           });
         } finally {

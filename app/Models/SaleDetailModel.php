@@ -43,11 +43,12 @@ class SaleDetailModel extends Model
     $this->set("sale_id", $saleDetailEntity->saleId);
     $this->set("item_id", $saleDetailEntity->itemId);
 
-    if (!$this->insert()) {
+    if (!$this->insert())
+    {
       $errors = $this->errors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
     return $this->readSingle($this->db->insertId());
@@ -58,14 +59,16 @@ class SaleDetailModel extends Model
     $saleDetailEntity = $this->find($saleDetailId);
     $errors           = $this->errors();
 
-    if (!empty($errors)) {
+    if (!empty($errors))
+    {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
-    if (!is_a($saleDetailEntity, SaleDetailEntity::class)) {
+    if (!is_a($saleDetailEntity, SaleDetailEntity::class))
+    {
       throw new Exception("El ID para leer detalles de venta no es válido");
     }
 
@@ -96,14 +99,16 @@ class SaleDetailModel extends Model
     $result = $this->findAll();
     $errors = $this->errors();
 
-    if (!empty($errors)) {
+    if (!empty($errors))
+    {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
-    if (empty($result)) {
+    if (empty($result))
+    {
       throw new Exception("No hay detalles de venta con el serial: {$saleSerial}");
     }
 
@@ -126,10 +131,11 @@ class SaleDetailModel extends Model
     $result = $this->first();
     $errors = $this->errors();
 
-    if (!empty($errors)) {
+    if (!empty($errors))
+    {
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -150,11 +156,12 @@ class SaleDetailModel extends Model
       "fdate"  => ["label" => "fecha final", "rules" => "permit_empty|valid_date[Y-m-d]"],
     ]);
 
-    if (!$validation->run($config)) {
+    if (!$validation->run($config))
+    {
       $errors = $validation->getErrors();
       throw new Exception(json_encode([
-          "type" => gettype($errors),
-          "data" => $errors,
+            "type" => gettype($errors),
+            "data" => $errors,
       ]));
     }
 
@@ -163,11 +170,13 @@ class SaleDetailModel extends Model
     $this->orLike("sale.sale_cancel_note", $needle);
     $this->groupEnd();
 
-    $status == "canceled" && $this->where("sale.sale_canceled", 'y');
-    $status == "not_canceled" && $this->where("sale.sale_canceled", 'n');
+    $status === "canceled" && $this->where("sale.sale_canceled", 'y');
+    $status === "not_canceled" && $this->where("sale.sale_canceled", 'n');
 
-    if (!empty($sdate) && !empty($fdate)) {
-      if (Time::parse($sdate)->isAfter($fdate)) {
+    if (!empty($sdate) && !empty($fdate))
+    {
+      if (Time::parse($sdate)->isAfter($fdate))
+      {
         throw new Exception("La fecha inicial no puede ser mayor a la fecha final");
       }
     }

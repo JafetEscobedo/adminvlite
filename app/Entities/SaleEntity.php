@@ -44,27 +44,31 @@ class SaleEntity extends BaseEntity
 
   public function isCanceled(): bool
   {
-    return $this->attributes["sale_canceled"] == 'y';
+    return $this->attributes["sale_canceled"] === 'y';
   }
 
   public function convertJsonStringToArray(string $string): array
   {
-    if (!$decoded = json_decode($string)) {
+    if (!$decoded = json_decode($string))
+    {
       throw new Exception("No se pudo decodificar los datos");
     }
 
-    if (count($decoded) > 100) {
+    if (count($decoded) > 100)
+    {
       throw new Exception("No se puede hacer más de 100 operaciones a la vez");
     }
 
-    foreach ($decoded as $record) {
+    foreach ($decoded as $record)
+    {
       $invalid = false;
       property_exists($record, "itemId") or $invalid = true;
       property_exists($record, "itemHistoryStockOnMove") or $invalid = true;
       property_exists($record, "saleCancelNote") or $invalid = true;
       property_exists($record, "saleSerial") or $invalid = true;
 
-      if ($invalid) {
+      if ($invalid)
+      {
         throw new Exception("El string json no tiene un formato válido");
       }
     }

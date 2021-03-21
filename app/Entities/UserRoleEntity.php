@@ -42,7 +42,7 @@ class UserRoleEntity extends BaseEntity
 
   public function isActive(): bool
   {
-    return $this->attributes["user_role_active"] == 'y';
+    return $this->attributes["user_role_active"] === 'y';
   }
 
   public function setUserRoleAccessFromRequest(RequestInterface $request, array $menus): UserRoleEntity

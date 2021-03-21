@@ -37,7 +37,7 @@ const dtUnitsList = $("#unitsList").DataTable({
       app.renderAlert({
         autohide: false,
         container: "alert",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
         type: "danger"
       });
 
@@ -56,9 +56,9 @@ const dtUnitsList = $("#unitsList").DataTable({
       render: data => _.capitalize(data.unitPluralName)
     }, {
       name: "unitActive",
-      render: data => data.unitActive == 'y'
-         ? `<span class="badge badge-success">Activa</span>`
-         : `<span class="badge badge-danger">Inactiva</span>`
+      render: data => data.unitActive === 'y'
+                ? `<span class="badge badge-success">Activa</span>`
+                : `<span class="badge badge-danger">Inactiva</span>`
     }, {
       name: "unitCreatedAt",
       render: data => `

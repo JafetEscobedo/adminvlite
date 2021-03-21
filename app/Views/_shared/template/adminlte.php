@@ -48,7 +48,7 @@ $segment4 = $request->uri->getSegment(4) ?? '';
 
       <aside class="main-sidebar sidebar-dark-primary elevation-4 sidebar-no-expand">
         <a href="<?= base_url() ?>" class="brand-link text-center">
-          <span class="brand-text font-weight-light <?= session("business_name_uc") == 'y' ? "text-uppercase" : '' ?>">
+          <span class="brand-text font-weight-light <?= session("business_name_uc") === 'y' ? "text-uppercase" : '' ?>">
             <?= session("business_name") ?>
           </span>
         </a>

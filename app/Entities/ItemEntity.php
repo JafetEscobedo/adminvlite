@@ -43,7 +43,7 @@ class ItemEntity extends BaseEntity
 
   public function isActive(): bool
   {
-    return $this->attributes["item_active"] == 'y';
+    return $this->attributes["item_active"] === 'y';
   }
 
   public function setItemName(string $value): void

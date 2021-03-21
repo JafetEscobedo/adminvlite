@@ -35,7 +35,7 @@ const dtUsersList = $("#usersList").DataTable({
       app.renderAlert({
         autohide: false,
         container: "alert",
-        message: typeof err == "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
+        message: typeof err === "string" ? err : "Intentalo de nuevo, si el error persiste contacta al administrador",
         type: "danger"
       });
       setdata({
@@ -51,9 +51,9 @@ const dtUsersList = $("#usersList").DataTable({
       data: "userSurname"
     }, {
       name: "userActive",
-      render: data => data.userActive == 'y'
-         ? `<span class="badge badge-success">Activo</span>`
-         : `<span class="badge badge-danger">Inactivo</span>`
+      render: data => data.userActive === 'y'
+                ? `<span class="badge badge-success">Activo</span>`
+                : `<span class="badge badge-danger">Inactivo</span>`
     }, {
       data: "userNickname"
     }, {
