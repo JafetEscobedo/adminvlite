@@ -1,4 +1,5 @@
 <?php
+
 /*
   | --------------------------------------------------------------------
   | App Versión
@@ -6,8 +7,7 @@
   |
   | Versión actual de AdminvLite
  */
-
-defined('APP_VERSION') || define('APP_VERSION', '1.1.2');
+defined('APP_VERSION') || define('APP_VERSION', '1.1.3');
 
 /*
   | --------------------------------------------------------------------
