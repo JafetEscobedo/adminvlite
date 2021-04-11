@@ -41,6 +41,12 @@ li.option.load-more {
   border-color: #c3e6cb !important;
 }
 
+.alert-warning {
+  color: #856404 !important;
+  background-color: #fff3cd !important;
+  border-color: #ffeeba !important;
+}
+
 .badge{
   border-radius: 0.25rem !important;
 }
