@@ -29,5 +29,4 @@
 <?= view("item/history/template/timeline_start") ?>
 <?= view("item/history/template/timeline_item") ?>
 <?= view("item/history/template/timeline_empty") ?>
-<?=
-view("item/history/template/timeline_end")?>
+<?= view("item/history/template/timeline_end") ?>
