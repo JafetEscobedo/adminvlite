@@ -140,7 +140,7 @@ const handleAddOne = e => {
     const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
 
     batch[batchIndex].itemHistoryStockOnMove += 1;
-    dtEgressBatch.row(tr).data(currentItem).draw(false);
+    dtEgressBatch.row(tr).data(batch[batchIndex]).draw(false);
     app.rebuildTooltips();
     txtItemCode.focus();
   }
@@ -160,7 +160,7 @@ const handleRemoveOne = e => {
     if (Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) === 1) return;
 
     batch[batchIndex].itemHistoryStockOnMove -= 1;
-    dtEgressBatch.row(tr).data(currentItem).draw(false);
+    dtEgressBatch.row(tr).data(batch[batchIndex]).draw(false);
     app.rebuildTooltips();
     txtItemCode.focus();
   }

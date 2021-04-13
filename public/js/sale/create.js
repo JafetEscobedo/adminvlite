@@ -117,9 +117,16 @@ const handleAddOne = e => {
     const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
 
     batch[batchIndex].itemHistoryStockOnMove += 1;
-    dtItemsBatch.row(tr).data(currentItem).draw(false);
+    dtItemsBatch.row(tr).data(batch[batchIndex]).draw(false);
     app.rebuildTooltips();
     txtItemCode.focus();
+
+    if (
+      Number.parseInt(batch[batchIndex].itemStock) < Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) ||
+      Number.parseInt(batch[batchIndex].itemStock === 0)
+      ) {
+      alertInsufficientStock(batch[batchIndex]);
+    }
   }
 };
 
@@ -137,7 +144,7 @@ const handleRemoveOne = e => {
     if (Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) === 1) return;
 
     batch[batchIndex].itemHistoryStockOnMove -= 1;
-    dtItemsBatch.row(tr).data(currentItem).draw(false);
+    dtItemsBatch.row(tr).data(batch[batchIndex]).draw(false);
     app.rebuildTooltips();
     txtItemCode.focus();
   }
