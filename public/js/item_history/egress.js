@@ -43,10 +43,19 @@ const dtEgressBatch = $("#egressBatch").DataTable({
           ${data.itemLastEgress}
         </span>`
     }, {
+      width: "110px",
       render: data => `
-        <button title="Remover" class="btn btn-remove-row btn-sm bg-gradient-danger" data-item-id="${data.itemId}" >
-          <i class="fas fa-fw fa-times-circle"></i>
-        </button>`
+        <div data-item-id="${data.itemId}">
+          <button title="Remove uno" class="btn btn-xs btn-remove-one bg-gradient-info">
+            <i class="fas fa-fw fa-minus-circle"></i>
+          </button>
+          <button title="Agregar uno" class="btn btn-xs btn-add-one bg-gradient-success">
+            <i class="fas fa-fw fa-plus-circle"></i>
+          </button>
+          <button title="Remover" class="btn btn-xs btn-remove-row bg-gradient-danger">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        <div>`
     }
   ]
 });
@@ -119,6 +128,61 @@ const clearInputs = () => {
   app.rebuildTooltips();
 };
 
+const handleAddOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-add-one")) btn = e.target;
+  if (e.target.matches(".btn-add-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    batch[batchIndex].itemHistoryStockOnMove += 1;
+    dtEgressBatch.row(tr).data(currentItem).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
+const handleRemoveOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-one")) btn = e.target;
+  if (e.target.matches(".btn-remove-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    if (Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) === 1) return;
+
+    batch[batchIndex].itemHistoryStockOnMove -= 1;
+    dtEgressBatch.row(tr).data(currentItem).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
+const handleRemoveRow = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-row")) btn = e.target;
+  if (e.target.matches(".btn-remove-row i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+    dtEgressBatch.row(tr).remove().draw(false);
+    batch.splice(batchIndex, 1);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
 window.addEventListener("keyup", e => {
   if (e.key === "F2") btnSave.click();
 });
@@ -149,7 +213,7 @@ formReadItem.onsubmit = async e => {
     const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
     if (existing !== -1) {
-      const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
+      const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).closest("tr");
       currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
       dtEgressBatch.row(tr).data(currentItem).draw(false);
       batch[existing] = currentItem;
@@ -175,27 +239,9 @@ formReadItem.onsubmit = async e => {
 };
 
 tbEgressBatch.onclick = e => {
-  let itemId = null;
-  let btn = null;
-
-  if (e.target.matches(".btn-remove-row")) {
-    itemId = e.target.dataset.itemId;
-    btn = e.target;
-  }
-
-  if (e.target.matches(".btn-remove-row i")) {
-    itemId = e.target.parentNode.dataset.itemId;
-    btn = e.target.parentNode;
-  }
-
-  if (itemId) {
-    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
-    txtItemCode.value = batch[batchIndex].itemCode;
-    txtItemCode.focus();
-    dtEgressBatch.row(btn.parentNode.parentNode).remove().draw(false);
-    batch.splice(batchIndex, 1);
-    app.rebuildTooltips();
-  }
+  handleRemoveRow(e);
+  handleRemoveOne(e);
+  handleAddOne(e);
 };
 
 btnSave.onclick = async () => {
