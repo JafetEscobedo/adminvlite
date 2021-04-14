@@ -53,6 +53,7 @@ view(
               <th scope="col">Código</th>
               <th scope="col">Artículo</th>
               <th scope="col">Cantidad</th>
+              <th scope="col">Existencias</th>
               <th scope="col">Precio c/u</th>
               <th scope="col">Precio Subtotal</th>
               <th scope="col"></th>

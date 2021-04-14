@@ -14,8 +14,8 @@ class ItemHistoryEntity extends BaseEntity
     "item_history_stock_on_move" => null,
     "item_history_note"          => null,
     "item_history_new_stock"     => null,
-    "event_inventory_id"         => null,
     "item_id"                    => null,
+    "item_history_event_id"      => null,
   ];
   protected $datamap    = [
     "itemHistoryId"          => "item_history_id",
@@ -25,8 +25,8 @@ class ItemHistoryEntity extends BaseEntity
     "itemHistoryStockOnMove" => "item_history_stock_on_move",
     "itemHistoryNote"        => "item_history_note",
     "itemHistoryNewStock"    => "item_history_new_stock",
-    "eventInventoryId"       => "event_inventory_id",
     "itemId"                 => "item_id",
+    "itemHistoryEventId"     => "item_history_event_id",
   ];
 
   public function setItemHistoryNote(string $value): void

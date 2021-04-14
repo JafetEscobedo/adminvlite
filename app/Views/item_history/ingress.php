@@ -28,10 +28,18 @@ view(
     <?= form_open('', ["name" => "readItem", "data-uri" => "item/read/single-by-code", "autocomplete" => "false"]) ?>
     <div class="row mb-3">
       <div class="col-md-12">
-        <b>Artículo:</b>
-        <span class="text-muted" id="itemSummary">
-          <small><i>Ningún artículo en panel de espera</i></small>
-        </span>
+        <div>
+          <b>Artículo:</b>
+          <span class="text-muted" id="itemSummary">
+            <small><i>Ningún artículo en panel de espera</i></small>
+          </span>
+        </div>
+        <div>
+          <b>Existencias:</b>
+          <span class="text-muted" id="itemStock">
+            <small><i>Información no disponible</i></small>
+          </span>
+        </div>
       </div>
     </div>
 

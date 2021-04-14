@@ -316,12 +316,7 @@ class SaleModel extends Model
         throw new Exception("Cantidad de venta para {$itemEntity->itemCode} - {$itemEntity->itemName} no puede ser 0");
       }
 
-      if ($itemStockOnMove > $itemStock)
-      {
-        throw new Exception("{$itemEntity->itemCode} - {$itemEntity->itemName} sin existencias suficientes");
-      }
-
-      //Crear objeto detalles de venta
+      // Crear objeto detalles de venta
       $saleDetailEntity->saleDetailItemCost    = $itemEntity->itemCost;
       $saleDetailEntity->saleDetailItemPrice   = $itemEntity->itemPrice;
       $saleDetailEntity->saleDetailStockOnMove = $itemStockOnMove;
@@ -329,14 +324,25 @@ class SaleModel extends Model
       $saleDetailEntity->itemId                = $itemEntity->itemId;
       $saleDetailModel->createSingle($saleDetailEntity);
 
-      //Crear Objeto del historial de artículos
+      // Crear Objeto del historial de artículos
       $itemHistoryEntity->itemId                 = $itemEntity->itemId;
       $itemHistoryEntity->itemHistoryEventId     = 3; // Venta de artículo
       $itemHistoryEntity->itemHistoryCost        = $itemEntity->itemCost * $itemStockOnMove;
       $itemHistoryEntity->itemHistoryPrice       = $itemEntity->itemPrice * $itemStockOnMove;
       $itemHistoryEntity->itemHistoryStockOnMove = $itemStockOnMove * -1;
       $itemHistoryEntity->itemHistoryNewStock    = $itemStock - $itemStockOnMove;
-      $itemHistoryEntity->itemHistoryNote        = "Venta de artículo realizada";
+
+      if ($itemStockOnMove > $itemStock)
+      {
+        $itemHistoryEntity->itemHistoryNote = ''
+          . "Venta de artículo realizada (Inventario descuadrado por "
+          . abs($itemHistoryEntity->itemHistoryNewStock) . " artículos)";
+      }
+      else
+      {
+        $itemHistoryEntity->itemHistoryNote = "Venta de artículo realizada";
+      }
+
       $itemHistoryModel->createSingle($itemHistoryEntity);
     }
 
@@ -345,7 +351,7 @@ class SaleModel extends Model
 
   public function cancelSingle(SaleEntity &$saleEntity): SaleEntity
   {
-    //La venta se cancela usando el número de venta (sale_serial)
+    // La venta se cancela usando el número de venta (sale_serial)
     $baseEntity = $this->readSingleBySaleSerial($saleEntity->saleSerial);
 
     if ($baseEntity->isCanceled())
@@ -364,7 +370,7 @@ class SaleModel extends Model
       $itemHistoryEntity = new ItemHistoryEntity();
       $itemStock         = $itemHistoryModel->readStockByItemId($saleDetail->itemId);
 
-      //Crear Objeto del historial de artículos
+      // Crear Objeto del historial de artículos
       $itemHistoryEntity->itemId                 = $saleDetail->itemId;
       $itemHistoryEntity->itemHistoryEventId     = 2; // Cancelación de venta
       $itemHistoryEntity->itemHistoryCost        = $saleDetail->saleDetailItemCost * $saleDetail->saleDetailStockOnMove;

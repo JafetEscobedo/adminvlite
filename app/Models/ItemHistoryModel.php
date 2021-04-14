@@ -33,7 +33,7 @@ class ItemHistoryModel extends Model
     "item_history_cost"          => ["label" => "costo del artículo", "rules" => "required|decimal"],
     "item_history_price"         => ["label" => "precio del artículo", "rules" => "required|decimal"],
     "item_history_stock_on_move" => ["label" => "stock en movimiento", "rules" => "required|integer"],
-    "item_history_new_stock"     => ["label" => "nuevo stock del artículo", "rules" => "required|integer|greater_than_equal_to[0]"],
+    "item_history_new_stock"     => ["label" => "nuevo stock del artículo", "rules" => "required|integer"],
     "item_history_note"          => ["label" => "anotación del movimiento", "rules" => "permit_empty|max_length[65000]"],
     "item_history_event_id"      => ["label" => "evento realizado en historial", "rules" => "required|is_natural_no_zero"],
     "item_id"                    => ["label" => "artículo en historial", "rules" => "required|is_natural_no_zero"]

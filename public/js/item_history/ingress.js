@@ -9,6 +9,7 @@ let currentItem = {};
 const batch = [];
 const formReadItem = document.readItem;
 const divItemSummary = document.getElementById("itemSummary");
+const divItemStock = document.getElementById("itemStock");
 const txtItemHistoryStockOnMove = document.getElementById("itemHistoryStockOnMove");
 const txtItemPrice = document.getElementById("itemPrice");
 const txtItemCost = document.getElementById("itemCost");
@@ -43,15 +44,24 @@ const dtIngressBatch = $("#ingressBatch").DataTable({
     {render: data => app.toCurrency(data.itemPrice)},
     {
       render: data => !data.itemLastEntry
-                ? `<small class="text-muted"><i>Sin registros</i></small>`
-                : `<span title="${moment(data.itemLastEntry).fromNow()} (${moment(data.itemLastEntry).format(app.dateFormat)})">
+          ? `<small class="text-muted"><i>Sin registros</i></small>`
+          : `<span title="${moment(data.itemLastEntry).fromNow()} (${moment(data.itemLastEntry).format(app.dateFormat)})">
               ${data.itemLastEntry}
             </span>`
     }, {
+      width: "110px",
       render: data => `
-        <button title="Remover" class="btn btn-remove-row btn-sm bg-gradient-danger" data-item-id="${data.itemId}">
-          <i class="fas fa-fw fa-times-circle"></i>
-        </button>`
+        <div data-item-id="${data.itemId}">
+          <button title="Remove uno" class="btn btn-xs btn-remove-one bg-gradient-info">
+            <i class="fas fa-fw fa-minus-circle"></i>
+          </button>
+          <button title="Agregar uno" class="btn btn-xs btn-add-one bg-gradient-success">
+            <i class="fas fa-fw fa-plus-circle"></i>
+          </button>
+          <button title="Remover" class="btn btn-xs btn-remove-row bg-gradient-danger">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        <div>`
     }
   ]
 });
@@ -124,12 +134,68 @@ const clearEntries = () => {
 const clearInputs = () => {
   codeValidated = false;
   divItemSummary.innerHTML = `<small><i>Ningún artículo en el panel de espera</i></small>`;
+  divItemStock.innerHTML = `<small><i>Información no disponible</i></small>`;
   txtItemCode.value = '';
   txtItemHistoryStockOnMove.value = '';
   txtItemCost.value = '';
   txtItemPrice.value = '';
   txtareaItemHistoryNote.value = '';
   txtItemCode.focus();
+};
+
+const handleAddOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-add-one")) btn = e.target;
+  if (e.target.matches(".btn-add-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    batch[batchIndex].itemHistoryStockOnMove += 1;
+    dtIngressBatch.row(tr).data(batch[batchIndex]).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
+const handleRemoveOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-one")) btn = e.target;
+  if (e.target.matches(".btn-remove-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    if (Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) === 1) return;
+
+    batch[batchIndex].itemHistoryStockOnMove -= 1;
+    dtIngressBatch.row(tr).data(batch[batchIndex]).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
+const handleRemoveRow = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-row")) btn = e.target;
+  if (e.target.matches(".btn-remove-row i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+    dtIngressBatch.row(tr).remove().draw(false);
+    batch.splice(batchIndex, 1);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
 };
 
 window.addEventListener("keyup", e => {
@@ -161,6 +227,9 @@ btnValidateItemCode.onclick = async () => {
 
     // El precio y costo se pueden actualizar en este panel
     divItemSummary.innerHTML = `${fetched.result.itemName} - ${fetched.result.itemDescription}`;
+    divItemStock.innerHTML = Number.parseInt(fetched.result.itemStock) > 0
+      ? `<b class="text-success">${fetched.result.itemStock}</b>`
+      : `<b class="text-danger">${fetched.result.itemStock}</b>`;
     txtItemCost.value = fetched.result.itemCost;
     txtItemPrice.value = fetched.result.itemPrice;
 
@@ -196,7 +265,7 @@ formReadItem.onsubmit = e => {
   const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
   if (existing !== -1) {
-    const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
+    const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).closest("tr");
     currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
     dtIngressBatch.row(tr).data(currentItem).draw(false);
     batch[existing] = currentItem;
@@ -209,27 +278,9 @@ formReadItem.onsubmit = e => {
 };
 
 tbIngressBatch.onclick = e => {
-  let itemId = null;
-  let btn = null;
-
-  if (e.target.matches(".btn-remove-row")) {
-    itemId = e.target.dataset.itemId;
-    btn = e.target;
-  }
-
-  if (e.target.matches(".btn-remove-row i")) {
-    itemId = e.target.parentNode.dataset.itemId;
-    btn = e.target.parentNode;
-  }
-
-  if (itemId) {
-    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
-    txtItemCode.value = batch[batchIndex].itemCode;
-    txtItemCode.focus();
-    dtIngressBatch.row(btn.parentNode.parentNode).remove().draw(false);
-    batch.splice(batchIndex, 1);
-    app.rebuildTooltips();
-  }
+  handleRemoveRow(e);
+  handleRemoveOne(e);
+  handleAddOne(e);
 };
 
 btnSave.onclick = async () => {

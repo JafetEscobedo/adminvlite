@@ -39,13 +39,23 @@ const dtItemsBatch = $("#itemsBatch").DataTable({
     {data: "itemCode"},
     {data: "itemName"},
     {render: data => `${data.itemHistoryStockOnMove} ${Number.parseInt(data.itemHistoryStockOnMove) === 1 ? data.unitSingularName : data.unitPluralName}`},
+    {render: data => `${data.itemStock} ${Number.parseInt(data.itemStock) === 1 ? data.unitSingularName : data.unitPluralName}`},
     {render: data => app.toCurrency(data.itemPrice)},
     {render: data => app.toCurrency(data.itemHistoryStockOnMove * data.itemPrice)},
     {
+      width: "110px",
       render: data => `
-        <button title="Remover" class="btn btn-sm btn-remove-row bg-gradient-danger" data-item-id="${data.itemId}">
-          <i class="fas fa-fw fa-times-circle"></i>
-        </button>`
+        <div data-item-id="${data.itemId}">
+          <button title="Remove uno" class="btn btn-xs btn-remove-one bg-gradient-info">
+            <i class="fas fa-fw fa-minus-circle"></i>
+          </button>
+          <button title="Agregar uno" class="btn btn-xs btn-add-one bg-gradient-success">
+            <i class="fas fa-fw fa-plus-circle"></i>
+          </button>
+          <button title="Remover" class="btn btn-xs btn-remove-row bg-gradient-danger">
+            <i class="fas fa-fw fa-times-circle"></i>
+          </button>
+        <div>`
     }
   ]
 });
@@ -86,6 +96,77 @@ const printSaleNote = html => {
   newWindow.focus();
 };
 
+const alertInsufficientStock = item => {
+  app.renderAlert({
+    autohide: false,
+    container: "alert",
+    message: `${item.itemCode} - ${item.itemName} no tiene existencias suficientes, la cantidad adicional aparecerá como faltante en su inventario`,
+    type: "warning"
+  });
+};
+
+const handleAddOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-add-one")) btn = e.target;
+  if (e.target.matches(".btn-add-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    batch[batchIndex].itemHistoryStockOnMove += 1;
+    dtItemsBatch.row(tr).data(batch[batchIndex]).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+
+    if (
+      Number.parseInt(batch[batchIndex].itemStock) < Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) ||
+      Number.parseInt(batch[batchIndex].itemStock === 0)
+      ) {
+      alertInsufficientStock(batch[batchIndex]);
+    }
+  }
+};
+
+const handleRemoveOne = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-one")) btn = e.target;
+  if (e.target.matches(".btn-remove-one i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+
+    if (Number.parseInt(batch[batchIndex].itemHistoryStockOnMove) === 1) return;
+
+    batch[batchIndex].itemHistoryStockOnMove -= 1;
+    dtItemsBatch.row(tr).data(batch[batchIndex]).draw(false);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
+const handleRemoveRow = e => {
+  let btn = null;
+
+  if (e.target.matches(".btn-remove-row")) btn = e.target;
+  if (e.target.matches(".btn-remove-row i")) btn = e.target.parentNode;
+
+  if (btn) {
+    const tr = btn.closest("tr");
+    const itemId = btn.parentNode.dataset.itemId;
+    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
+    dtItemsBatch.row(tr).remove().draw(false);
+    batch.splice(batchIndex, 1);
+    app.rebuildTooltips();
+    txtItemCode.focus();
+  }
+};
+
 formReadItem.onsubmit = async e => {
   try {
     e.preventDefault();
@@ -103,7 +184,7 @@ formReadItem.onsubmit = async e => {
     const existing = batch.findIndex(el => Number.parseInt(el.itemId) === Number.parseInt(currentItem.itemId));
 
     if (existing !== -1) {
-      const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).parentNode.parentNode;
+      const tr = document.querySelector(`[data-item-id="${currentItem.itemId}"]`).closest("tr");
       currentItem.itemHistoryStockOnMove += batch[existing].itemHistoryStockOnMove;
       dtItemsBatch.row(tr).data(currentItem).draw(false);
       batch[existing] = currentItem;
@@ -112,6 +193,14 @@ formReadItem.onsubmit = async e => {
       batch.push(currentItem);
     }
 
+    if (
+      Number.parseInt(currentItem.itemStock) < Number.parseInt(currentItem.itemHistoryStockOnMove) ||
+      Number.parseInt(currentItem.itemStock === 0)
+      ) {
+      alertInsufficientStock(currentItem);
+    }
+
+    txtItemHistoryStockOnMove.value = 1;
     txtItemCode.value = '';
   } catch (err) {
     txtItemCode.select();
@@ -129,26 +218,9 @@ formReadItem.onsubmit = async e => {
 };
 
 tbItemsBatch.onclick = e => {
-  let itemId = null;
-  let btn = null;
-
-  if (e.target.matches(".btn-remove-row")) {
-    itemId = e.target.dataset.itemId;
-    btn = e.target;
-  }
-
-  if (e.target.matches(".btn-remove-row i")) {
-    itemId = e.target.parentNode.dataset.itemId;
-    btn = e.target.parentNode;
-  }
-
-  if (itemId) {
-    const batchIndex = batch.findIndex(entry => Number.parseInt(entry.itemId) === Number.parseInt(itemId));
-    dtItemsBatch.row(btn.parentNode.parentNode).remove().draw(false);
-    batch.splice(batchIndex, 1);
-    app.rebuildTooltips();
-    txtItemCode.focus();
-  }
+  handleRemoveRow(e);
+  handleRemoveOne(e);
+  handleAddOne(e);
 };
 
 window.addEventListener("keyup", e => {
