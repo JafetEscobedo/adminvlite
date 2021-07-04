@@ -8,12 +8,14 @@ use CodeIgniter\Controller;
 use CodeIgniter\Files\File;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
-use Config\Services;
 use Config\Database;
+use Config\Services;
 use Psr\Log\LoggerInterface;
+use function redirect;
 
 class BaseController extends Controller
 {
+  protected $request;
   protected $helpers = ["form", "handle", "array"];
   protected $db;
   protected $session;
@@ -215,4 +217,5 @@ class BaseController extends Controller
       ]
     ];
   }
+
 }
