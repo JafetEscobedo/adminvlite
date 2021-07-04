@@ -1,19 +1,20 @@
 <?=
+
 view(
   "_shared/partial/app_breadcrumb",
   [
-    "links" =>
-    [
+    "links" => [
       [
         "text" => "Inventario",
         "href" => base_url("item-history")
       ], [
-        "text" => "Ingreso a invetario",
+        "text" => "Ingreso a inventario",
         "href" => "#"
       ],
     ]
   ]
 )
+
 ?>
 
 <div class="card pt-3">

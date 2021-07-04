@@ -1,10 +1,12 @@
 <?php
+
 // Obtener controlador y método de la solicitud http
 $request  = service("request");
 $segment1 = $request->uri->getSegment(1) . " | ";
 $segment2 = $request->uri->getSegment(2) . " | ";
 $segment3 = $request->uri->getSegment(3) . (empty($request->uri->getSegment(4)) ? '' : " | ");
 $segment4 = $request->uri->getSegment(4) ?? '';
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +16,7 @@ $segment4 = $request->uri->getSegment(4) ?? '';
     <?= view("_shared/partial/app_head", ["title" => ucwords($segment1, '-') . ucwords($segment2, '-') . ucwords($segment3, '-') . ucwords($segment4, '-')]) ?>
   </head>
 
-  <body class="hold-transition sidebar-mini layout-fixed text-sm">
+  <body class="hold-transition layout-fixed text-sm">
     <div class="wrapper">
       <nav class="main-header navbar navbar-expand navbar-light navbar-white">
         <ul class="navbar-nav">
