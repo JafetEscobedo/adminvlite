@@ -7,7 +7,7 @@
   |
   | Versión actual de AdminvLite
  */
-defined('APP_VERSION') || define('APP_VERSION', '1.3.1');
+defined('APP_VERSION') || define('APP_VERSION', '1.3.2');
 
 /*
   | --------------------------------------------------------------------
